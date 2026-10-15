@@ -188,7 +188,8 @@ gbif_sps_coord <- gbif_sf_crop |>
                   as.data.frame() |>
                   dplyr::rename("Longitude" = X,
                                 "Latitude" = Y)) |>
-  dplyr::select(order:species, dplyr::contains("tude"))
+  dplyr::select(order:species, dplyr::contains("tude")) |>
+  sf::st_drop_geometry()
 
 gbif_sps_coord
 
