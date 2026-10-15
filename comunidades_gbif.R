@@ -83,3 +83,12 @@ gbif |>
   dplyr::filter(!decimalLongitude |> is.na()) |>
   ggplot(aes(decimalLongitude)) +
   geom_histogram()
+
+### Gráfico ----
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_point(data = gbif |>
+               dplyr::filter(!decimalLongitude |> is.na() &
+                               !decimalLatitude |> is.na()),
+             aes(decimalLongitude, decimalLatitude))
