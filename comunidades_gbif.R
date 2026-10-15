@@ -177,6 +177,10 @@ gbif_sf_crop <- gbif_sf_crop |>
 
 gbif_sf_crop
 
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = gbif_sf_crop)
+
 ## Extrair as coordenadas ----
 
 gbif_sps_coord <- gbif_sf_crop |>
