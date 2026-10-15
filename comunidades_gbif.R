@@ -104,3 +104,14 @@ gbif_sf
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = gbif_sf)
+
+## Recortar a área para a Caatinga ----
+
+gbif_sf_crop <- gbif_sf |>
+  sf::st_intersection(caa)
+
+gbif_sf_crop
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = gbif_sf_crop)
