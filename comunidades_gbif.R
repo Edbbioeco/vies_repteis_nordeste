@@ -176,3 +176,14 @@ gbif_sf_crop <- gbif_sf_crop |>
     "Thamnodynastes strigatus"))
 
 gbif_sf_crop
+
+## Extrair as coordenadas ----
+
+gbif_sps_coord <- gbif_sf_crop |>
+  dplyr::mutate(sf::st_coordinates(geometry) |>
+                  as.data.frame() |>
+                  dplyr::rename("Longitude" = X,
+                                "Latitude" = Y)) |>
+  dplyr::select(order:species, dplyr::contains("tude"))
+
+gbif_sps_coord
