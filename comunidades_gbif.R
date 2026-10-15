@@ -191,3 +191,7 @@ gbif_sps_coord <- gbif_sf_crop |>
   dplyr::select(order:species, dplyr::contains("tude"))
 
 gbif_sps_coord
+
+## Exportar data frame ----
+
+gbif_sps_coord |> writexl::write_xlsx("registros_gbif.xlsx")
