@@ -42,3 +42,10 @@ gbif |> dplyr::glimpse()
 
 caa <- sf::st_read("biomas.gpkg") |>
   dplyr::filter(name_biome == "Caatinga")
+
+### Visualizar ----
+
+caa
+
+ggplot() +
+  geom_sf(data = caa, color = "black")
