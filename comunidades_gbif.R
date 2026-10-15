@@ -196,3 +196,9 @@ gbif_sps_coord
 ## Exportar data frame ----
 
 gbif_sps_coord |> writexl::write_xlsx("registros_gbif.xlsx")
+
+## Subir para o Google Drive ----
+
+"registros_gbif.xlsx" |>
+  googledrive::drive_upload(path = "repteis_caatinga",
+                            name = "registros_gbif.xlsx")
