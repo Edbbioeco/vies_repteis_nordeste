@@ -28,7 +28,9 @@ caminho <- "repteis_caatinga" |>
                               path = tempfile(fileext = ".csv")) |>
   dplyr::pull(local_path)
 
-gbif <- readr::read_csv2(caminho)
+gbif <- readr::read_tsv(caminho,
+                        quote = "",
+                        na = "")
 
 ## Visualizar dados ----
 
@@ -67,4 +69,17 @@ gbif |>
 gbif |>
   dplyr::filter(!decimalLatitude |> is.na()) |>
   ggplot(aes(decimalLatitude)) +
+  geom_histogram()
+
+gbif |>
+  dplyr::filter(!decimalLongitude |> is.na()) |>
+  dplyr::pull(decimalLongitude) |>
+  as.character() |>
+  nchar() |>
+  unique() |>
+  sort()
+
+gbif |>
+  dplyr::filter(!decimalLongitude |> is.na()) |>
+  ggplot(aes(decimalLongitude)) +
   geom_histogram()
