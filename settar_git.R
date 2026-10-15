@@ -18,3 +18,6 @@ gert::git_commit(message = "Firts commit")
 
 usethis::use_github()
 
+# Criar README ----
+
+usethis::use_readme_md()
