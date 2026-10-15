@@ -29,3 +29,9 @@ caminho <- "repteis_caatinga" |>
   dplyr::pull(local_path)
 
 gbif <- readr::read_csv2(caminho)
+
+## Visualizar dados ----
+
+gbif
+
+gbif |> dplyr::glimpse()
