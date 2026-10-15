@@ -49,3 +49,22 @@ caa
 
 ggplot() +
   geom_sf(data = caa, color = "black")
+
+# Recortar os registros para a Caatinga ----
+
+## Tratar as coordenadas ----
+
+### Checar a aquantidade de dígitos de latitude e longitude ----
+
+gbif |>
+  dplyr::filter(!decimalLatitude |> is.na()) |>
+  dplyr::pull(decimalLatitude) |>
+  as.character() |>
+  nchar() |>
+  unique() |>
+  sort()
+
+gbif |>
+  dplyr::filter(!decimalLatitude |> is.na()) |>
+  ggplot(aes(decimalLatitude)) +
+  geom_histogram()
