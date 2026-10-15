@@ -115,3 +115,64 @@ gbif_sf_crop
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = gbif_sf_crop)
+
+## Listar espécies ----
+
+gbif_sf_crop |>
+  dplyr::filter(!species |> is.na()) |>
+  dplyr::pull(species) |>
+  unique()
+
+## Excluir espécies de fora da Caatinga ----
+
+gbif_sf_crop <- gbif_sf_crop |>
+  dplyr::filter(!species %in% c(
+    "Mauremys leprosa",
+    "Crocodylus porosus",
+    "Lygodactylus conraui",
+    "Cynisca leucura",
+    "Santanaraptor placidus",
+    "Trachemys scripta",
+    "Tropidurus bogerti",
+    "Apostolepis mariae",
+    "Mabuya mabouya",
+    "Salvator rufescens",
+    "Amphisbaena eleutheria",
+    "Erythrolamprus cobella",
+    "Anolis chrysolepis",
+    "Norops chrysolepis",
+    "Pseudogonatodes guianensis",
+    "Cercosaura ocellata",
+    "Bothrops atrox",
+    "Uranoscodon superciliosus",
+    "Thecadactylus rapicauda",
+    "Mabuya bistriata",
+    "Lygophis lineatus",
+    "Lachesis muta",
+    "Phrynops tuberosus",
+    "Bothrops brazili",
+    "Clelia clelia",
+    "Melanosuchus niger",
+    "Podocnemis expansa",
+    "Xenodon severus",
+    "Cnemidophorus cryptus",
+    "Chironius scurrula",
+    "Micrurus paraensis",
+    "Lepidoblepharis heyerorum",
+    "Plica umbra",
+    "Chatogekko amazonicus",
+    "Loxopholis guianense",
+    "Arthrosaura reticulata",
+    "Vanzosaura rubricauda",
+    "Tropidurus guarani",
+    "Ameivula cipoensis",
+    "Helicops nentur",
+    "Bothrops fonsecai",
+    "Urostrophus grilli",
+    "Atractus pantostictus",
+    "Cercosaura schreibersii",
+    "Boiruna maculata",
+    "Micrurus frontalis",
+    "Thamnodynastes strigatus"))
+
+gbif_sf_crop
