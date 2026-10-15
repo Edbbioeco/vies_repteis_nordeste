@@ -92,3 +92,15 @@ ggplot() +
                dplyr::filter(!decimalLongitude |> is.na() &
                                !decimalLatitude |> is.na()),
              aes(decimalLongitude, decimalLatitude))
+
+## Transformar os registros em shapefile ----
+
+gbif_sf <- gbif |>
+  sf::st_as_sf(coords = c("decimalLongitude", "decimalLatitude"),
+               crs = 4674)
+
+gbif_sf
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = gbif_sf)
