@@ -26,3 +26,10 @@ ggplot() +
 
 uc <- geobr::read_conservation_units(date = 202503) |>
   sf::st_make_valid()
+
+## Visualizar ----
+
+uc
+
+ggplot() +
+  geom_sf(data = uc, color = "black")
