@@ -33,3 +33,16 @@ uc
 
 ggplot() +
   geom_sf(data = uc, color = "black")
+
+# Tratar os shapefiles ----
+
+## Recortar shapefile ----
+
+uc_caa <- uc |>
+  sf::st_intersection(caa)
+
+uc_caa
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = uc_caa, color = "red")
