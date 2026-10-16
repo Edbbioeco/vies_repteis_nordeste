@@ -46,3 +46,7 @@ uc_caa
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = uc_caa, color = "red")
+
+## Exportar ----
+
+uc_caa |> sf::st_write("gaz_uc.gpkg")
