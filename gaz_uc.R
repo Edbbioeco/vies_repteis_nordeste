@@ -50,3 +50,9 @@ ggplot() +
 ## Exportar ----
 
 uc_caa |> sf::st_write("gaz_uc.gpkg")
+
+## Enviar para o Google Drive ----
+
+"gaz_uc.gpkg" |>
+  googledrive::drive_upload(path = "repteis_caatinga",
+                            name = "gaz_uc.gpkg")
