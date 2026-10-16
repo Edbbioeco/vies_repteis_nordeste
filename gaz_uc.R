@@ -19,3 +19,10 @@ caa
 
 ggplot() +
   geom_sf(data = caa, color = "black")
+
+# Shapefile das unidades de conservação ----
+
+## Importar ----
+
+uc <- geobr::read_conservation_units(date = 202503) |>
+  sf::st_make_valid()
