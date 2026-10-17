@@ -19,3 +19,9 @@ caa
 
 ggplot() +
   geom_sf(data = caa, color = "black")
+
+# Shapefile das áreas urbanas ----
+
+## Importar ----
+
+urb <- geobr::read_urban_area(year = 2022)
