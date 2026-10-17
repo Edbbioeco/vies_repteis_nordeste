@@ -45,3 +45,7 @@ urb_caa
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = urb_caa, color = "red")
+
+## Exportar ----
+
+urb_caa |> sf::st_write("gaz_urb.gpkg")
