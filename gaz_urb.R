@@ -25,3 +25,10 @@ ggplot() +
 ## Importar ----
 
 urb <- geobr::read_urban_area(year = 2022)
+
+## Visualizar ----
+
+urb
+
+ggplot() +
+  geom_sf(data = urb, color = "black")
