@@ -32,3 +32,16 @@ urb
 
 ggplot() +
   geom_sf(data = urb, color = "black")
+
+# Tratar os shapefiles ----
+
+## Recortar shapefile ----
+
+urb_caa <- urb |>
+  sf::st_intersection(caa)
+
+urb_caa
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = urb_caa, color = "red")
