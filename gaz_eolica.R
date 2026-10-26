@@ -6,6 +6,8 @@ library(tidyverse)
 
 library(sf)
 
+library(googledrive)
+
 # Shapefile da caatinga ----
 
 ## Importar ----
