@@ -34,3 +34,11 @@ rod <- list.files(pattern = "^GEOFT_.*\\.shp$") |>
 
       },
     .progress = TRUE)
+
+## Visualizar ----
+
+rod
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = rod, color = "black")
