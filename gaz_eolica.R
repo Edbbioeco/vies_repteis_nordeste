@@ -46,3 +46,7 @@ eol_caa
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = eol_caa, color = "red")
+
+## Exportar ----
+
+eol_caa |> sf::st_write("gaz_eolica.gpkg")
