@@ -25,3 +25,11 @@ ggplot() +
 ## Importar ----
 
 eol <- sf::st_read("Aerogeradores.shp")
+
+## Visualizar ----
+
+eol
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = eol, color = "black")
