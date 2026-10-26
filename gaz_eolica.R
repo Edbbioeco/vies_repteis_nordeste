@@ -50,3 +50,9 @@ ggplot() +
 ## Exportar ----
 
 eol_caa |> sf::st_write("gaz_eolica.gpkg")
+
+## Enviar para o Google Drive ----
+
+"gaz_eolica.gpkg" |>
+  googledrive::drive_upload(path = "repteis_caatinga",
+                            name = "gaz_eolica.gpkg")
