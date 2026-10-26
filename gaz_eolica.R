@@ -33,3 +33,16 @@ eol
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = eol, color = "black")
+
+# Tratar os shapefiles ----
+
+## Recortar shapefile ----
+
+eol_caa <- eol |>
+  sf::st_intersection(caa)
+
+eol_caa
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = eol_caa, color = "red")
