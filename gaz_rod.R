@@ -55,3 +55,7 @@ rod_caa
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = rod_caa, color = "red")
+
+## Exportar ----
+
+rod_caa |> sf::st_write("gaz_rod.gpkg")
