@@ -59,3 +59,9 @@ ggplot() +
 ## Exportar ----
 
 rod_caa |> sf::st_write("gaz_rod.gpkg")
+
+## Enviar para o Google Drive ----
+
+"gaz_rod.gpkg" |>
+  googledrive::drive_upload(path = "repteis_caatinga",
+                            name = "gaz_rod.gpkg")
