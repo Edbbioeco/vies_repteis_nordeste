@@ -42,3 +42,16 @@ rod
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = rod, color = "black")
+
+# Tratar os shapefiles ----
+
+## Recortar shapefile ----
+
+rod_caa <- rod |>
+  sf::st_intersection(caa)
+
+rod_caa
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = rod_caa, color = "red")
