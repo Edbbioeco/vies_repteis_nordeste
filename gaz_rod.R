@@ -21,3 +21,16 @@ caa
 
 ggplot() +
   geom_sf(data = caa, color = "black")
+
+# Shapefile das rodovias ----
+
+## Importar ----
+
+rod <- list.files(pattern = "^GEOFT_.*\\.shp$") |>
+  purrr::map_dfr(
+    \(arquivo){
+
+      sf::st_read(arquivo)
+
+      },
+    .progress = TRUE)
