@@ -4,7 +4,7 @@ library(sf)
 
 library(tidyverse)
 
-library(geobr)
+library(sf)
 
 # Shapefile da caatinga ----
 
