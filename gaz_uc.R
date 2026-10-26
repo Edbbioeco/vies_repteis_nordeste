@@ -6,6 +6,8 @@ library(tidyverse)
 
 library(geobr)
 
+library(googledrive)
+
 # Shapefile da caatinga ----
 
 ## Importar ----
