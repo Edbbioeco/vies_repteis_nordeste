@@ -19,3 +19,9 @@ caa
 
 ggplot() +
   geom_sf(data = caa, color = "black")
+
+# Shapefile das usinas eólicas ----
+
+## Importar ----
+
+eol <- sf::st_read("Aerogeradores.shp")
