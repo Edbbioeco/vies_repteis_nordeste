@@ -29,3 +29,9 @@ caminho <- "repteis_caatinga" |>
   dplyr::pull(local_path)
 
 specieslink <- readxl::read_xlsx(caminho)
+
+### Visualizar dados ----
+
+specieslink
+
+specieslink |> dplyr::glimpse()
