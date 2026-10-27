@@ -48,3 +48,7 @@ rios_caa
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = rios_caa, color = "blue")
+
+## Exportar ----
+
+rios_caa |> sf::st_write("rios_caa.gpkg")
