@@ -210,3 +210,9 @@ specieslink_sf_coord
 ## Exportar data frame ----
 
 specieslink_sf_coord |> writexl::write_xlsx("registros_specieslink.xlsx")
+
+## Subir para o Google Drive ----
+
+"registros_specieslink.xlsx" |>
+  googledrive::drive_upload(path = "repteis_caatinga",
+                            name = "registros_specieslink.xlsx")
