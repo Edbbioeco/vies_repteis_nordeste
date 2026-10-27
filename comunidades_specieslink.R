@@ -134,3 +134,24 @@ specieslink_sf_crop |>
   dplyr::filter(!scientificname |> is.na()) |>
   dplyr::pull(scientificname) |>
   unique()
+
+## Excluir espécies de fora da Caatinga ----
+
+specieslink_sf_crop <- specieslink_sf_crop |>
+  dplyr::filter(!scientificname %in% c(
+    "Lygophis lineatus",
+    "Lygophis lineatus ser",
+    "Thecadactylus rapicauda",
+    "Vanzosaura rubricauda",
+    "Bothrops atrox",
+    "Xenodon severus",
+    "Melanosuchus niger",
+    "Podocnemis expansa",
+    "Ameivula cipoensis",
+    "Thamnodynastes strigatus"))
+
+specieslink_sf_crop
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = specieslink_sf_crop)
