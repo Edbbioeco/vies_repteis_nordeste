@@ -49,3 +49,43 @@ caa
 
 ggplot() +
   geom_sf(data = caa, color = "black")
+
+# Recortar os registros para a Caatinga ----
+
+## Tratar as coordenadas ----
+
+### Checar a aquantidade de dígitos de latitude e longitude ----
+
+specieslink |>
+  dplyr::mutate(dplyr::across(.cols = dplyr::contains("itude"),
+                              .fns = ~.x |> as.numeric())) |>
+  dplyr::filter(!latitude |> is.na()) |>
+  dplyr::pull(latitude) |>
+  as.character() |>
+  nchar() |>
+  unique() |>
+  sort()
+
+specieslink |>
+  dplyr::mutate(dplyr::across(.cols = dplyr::contains("itude"),
+                              .fns = ~.x |> as.numeric())) |>
+  dplyr::filter(!latitude |> is.na()) |>
+  ggplot(aes(latitude)) +
+  geom_histogram()
+
+specieslink |>
+  dplyr::mutate(dplyr::across(.cols = dplyr::contains("itude"),
+                              .fns = ~.x |> as.numeric())) |>
+  dplyr::filter(!longitude |> is.na()) |>
+  dplyr::pull(longitude) |>
+  as.character() |>
+  nchar() |>
+  unique() |>
+  sort()
+
+specieslink |>
+  dplyr::mutate(dplyr::across(.cols = dplyr::contains("itude"),
+                              .fns = ~.x |> as.numeric())) |>
+  dplyr::filter(!longitude |> is.na()) |>
+  ggplot(aes(longitude)) +
+  geom_histogram()
