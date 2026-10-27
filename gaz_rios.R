@@ -52,3 +52,9 @@ ggplot() +
 ## Exportar ----
 
 rios_caa |> sf::st_write("rios_caa.gpkg")
+
+## Enviar para o Google Drive ----
+
+"rios_caa.gpkg" |>
+  googledrive::drive_upload(path = "repteis_caatinga",
+                            name = "rios_caa.gpkg")
