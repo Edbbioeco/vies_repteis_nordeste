@@ -127,3 +127,10 @@ specieslink_sf_crop
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = specieslink_sf_crop)
+
+## Listar espécies ----
+
+specieslink_sf_crop |>
+  dplyr::filter(!scientificname |> is.na()) |>
+  dplyr::pull(scientificname) |>
+  unique()
