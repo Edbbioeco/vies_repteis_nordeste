@@ -35,3 +35,16 @@ rios
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = rios, color = "black")
+
+# Tratar os shapefiles ----
+
+## Recortar shapefile ----
+
+rios_caa <- rios |>
+  sf::st_intersection(caa)
+
+rios_caa
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = rios_caa, color = "blue")
