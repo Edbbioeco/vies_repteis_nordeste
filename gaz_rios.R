@@ -21,3 +21,9 @@ caa
 
 ggplot() +
   geom_sf(data = caa, color = "black")
+
+# Shapefile das rodovias ----
+
+## Importar ----
+
+rios <- sf::st_read("geoft_bho_curso_dagua.gpkg")
