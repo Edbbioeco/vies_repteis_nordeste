@@ -206,3 +206,7 @@ specieslink_sf_coord <- specieslink_sf_crop |>
   sf::st_drop_geometry()
 
 specieslink_sf_coord
+
+## Exportar data frame ----
+
+specieslink_sf_coord |> writexl::write_xlsx("registros_specieslink.xlsx")
