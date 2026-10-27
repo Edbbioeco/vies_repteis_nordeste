@@ -116,3 +116,14 @@ specieslink_sf
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = specieslink_sf)
+
+## Recortar a área para a Caatinga ----
+
+specieslink_sf_crop <- specieslink_sf |>
+  sf::st_intersection(caa)
+
+specieslink_sf_crop
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = specieslink_sf_crop)
