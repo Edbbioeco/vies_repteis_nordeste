@@ -155,3 +155,37 @@ specieslink_sf_crop
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = specieslink_sf_crop)
+
+## Criar variável das ordens ----
+
+specieslink_sf_crop <- specieslink_sf_crop |>
+  dplyr::mutate(order = dplyr::case_when(
+
+    scientificname %in% c(
+      "Caretta caretta",
+      "Chelonia mydas",
+      "Eretmochelys imbricata",
+      "Dermochelys coriaceae",
+      "Lepdochelys olivaceae",
+      "Phrynops geoffroanus",
+      "Phrynops geoffroanus geoffroanus",
+      "Kinosternon scorpioides",
+      "Kinosternon scorpioides scorpioides",
+      "Mesoclemmys tuberculata tuberculata",
+      "Mesoclemmys sp.",
+      "Geochelone denticulata",
+      "Chelonoidis denticulata",
+      "Chelonoidis carbonaria",
+      "Podocnemis expansa",
+      "Trachemys adiutrix") ~ "Testudines",
+    scientificname == "Caiman crocodilus" ~ "Crocodylia",
+    .default = "Squamata"
+
+    ))
+
+specieslink_sf_crop
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = specieslink_sf_crop, aes(color = order),
+          size = 5)
