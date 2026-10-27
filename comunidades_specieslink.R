@@ -35,3 +35,10 @@ specieslink <- readxl::read_xlsx(caminho)
 specieslink
 
 specieslink |> dplyr::glimpse()
+
+## Shapefile da caatinga ----
+
+### Importar ----
+
+caa <- sf::st_read("biomas.gpkg") |>
+  dplyr::filter(name_biome == "Caatinga")
