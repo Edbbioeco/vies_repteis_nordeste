@@ -27,3 +27,11 @@ ggplot() +
 ## Importar ----
 
 rios <- sf::st_read("geoft_bho_curso_dagua.gpkg")
+
+## Visualizar ----
+
+rios
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = rios, color = "black")
