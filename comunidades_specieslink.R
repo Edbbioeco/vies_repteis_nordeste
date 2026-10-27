@@ -100,3 +100,19 @@ ggplot() +
                dplyr::filter(!longitude |> is.na() &
                                !latitude |> is.na()),
              aes(longitude, latitude))
+
+## Transformar os registros em shapefile ----
+
+specieslink_sf <- specieslink |>
+  dplyr::mutate(dplyr::across(.cols = dplyr::contains("itude"),
+                              .fns = ~.x |> as.numeric()))|>
+  dplyr::filter(!longitude |> is.na() &
+                  !latitude |> is.na()) |>
+  sf::st_as_sf(coords = c("longitude", "latitude"),
+               crs = 4674)
+
+specieslink_sf
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = specieslink_sf)
