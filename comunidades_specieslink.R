@@ -89,3 +89,14 @@ specieslink |>
   dplyr::filter(!longitude |> is.na()) |>
   ggplot(aes(longitude)) +
   geom_histogram()
+
+### Gráfico ----
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_point(data = gbif |>
+               dplyr::mutate(dplyr::across(.cols = dplyr::contains("itude"),
+                                           .fns = ~.x |> as.numeric())) |>
+               dplyr::filter(!longitude |> is.na() &
+                               !latitude |> is.na()),
+             aes(longitude, latitude))
