@@ -29,3 +29,9 @@ caminho <- "repteis_caatinga" |>
 sibbr <- readr::read_csv(caminho,
                           col_types = readr::cols(.default = readr::col_character()),
                           show_col_types = FALSE)
+
+### Visualizar dados ----
+
+sibbr
+
+sibbr |> dplyr::glimpse()
