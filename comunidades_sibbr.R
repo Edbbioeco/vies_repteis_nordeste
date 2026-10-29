@@ -176,3 +176,20 @@ sibbr_sf_crop
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = specieslink_sf_crop)
+
+## Extrair as coordenadas ----
+
+sibbr_sf_coord <- sibbr_sf_crop |>
+  dplyr::mutate(sf::st_coordinates(geometry) |>
+                  as.data.frame() |>
+                  dplyr::rename("Longitude" = X,
+                                "Latitude" = Y)) |>
+  dplyr::select(order = Order,
+                family = Family,
+                genus = Genus,
+                species = Species,
+                Longitude,
+                Latitude) |>
+  sf::st_drop_geometry()
+
+sibbr_sf_coord
