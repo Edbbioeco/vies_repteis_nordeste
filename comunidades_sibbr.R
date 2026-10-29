@@ -127,3 +127,10 @@ sibbr_sf_crop
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = sibbr_sf_crop)
+
+## Listar espécies ----
+
+sibbr_sf_crop |>
+  dplyr::filter(!Species |> is.na()) |>
+  dplyr::pull(Species) |>
+  unique()
