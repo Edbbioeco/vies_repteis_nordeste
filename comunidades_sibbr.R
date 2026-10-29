@@ -134,3 +134,45 @@ sibbr_sf_crop |>
   dplyr::filter(!Species |> is.na()) |>
   dplyr::pull(Species) |>
   unique()
+
+## Excluir espécies de fora da Caatinga ----
+
+sibbr_sf_crop <- sibbr_sf_crop |>
+  dplyr::filter(!Species %in% c(
+    "Salvator rufescens",
+    "Vanzosaura rubricauda",
+    "Lachesis muta",
+    "Loxopholis guianense",
+    "Bothrops atrox",
+    "Chironius scurrula",
+    "Phrynops tuberosus",
+    "Podocnemis expansa",
+    "Chatogekko amazonicus",
+    "Mabuya bistriata",
+    "Plica umbra",
+    "Lygophis lineatus",
+    "Arthrosaura reticulata",
+    "Lepidoblepharis heyerorum",
+    "Xenodon severus",
+    "Melanosuchus niger",
+    "Uranoscodon superciliosus",
+    "Pseudogonatodes guianensis",
+    "Thecadactylus rapicauda",
+    "Clelia clelia",
+    "Bothrops brazili",
+    "Cercosaura ocellata",
+    "Micrurus spixii",
+    "Micrurus frontalis",
+    "Anisolepis grilli",
+    "Bothrops fonsecai",
+    "Thamnodynastes strigatus",
+    "Ameivula cipoensis",
+    "Boiruna maculata",
+    "Cercosaura schreibersii"
+    ))
+
+sibbr_sf_crop
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = specieslink_sf_crop)
