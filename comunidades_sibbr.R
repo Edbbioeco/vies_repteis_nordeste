@@ -175,7 +175,7 @@ sibbr_sf_crop
 
 ggplot() +
   geom_sf(data = caa, color = "black") +
-  geom_sf(data = specieslink_sf_crop)
+  geom_sf(data = sibbr_sf_crop, aes(color = Order))
 
 ## Extrair as coordenadas ----
 
