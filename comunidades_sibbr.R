@@ -198,3 +198,9 @@ sibbr_sf_coord
 ## Exportar data frame ----
 
 sibbr_sf_coord |> writexl::write_xlsx("registros_sibbr.xlsx")
+
+## Subir para o Google Drive ----
+
+"registros_sibbr.xlsx" |>
+  googledrive::drive_upload(path = "repteis_caatinga",
+                            name = "registros_sibbr.xlsx")
