@@ -194,3 +194,7 @@ sibbr_sf_coord <- sibbr_sf_crop |>
   sf::st_drop_geometry()
 
 sibbr_sf_coord
+
+## Exportar data frame ----
+
+sibbr_sf_coord |> writexl::write_xlsx("registros_sibbr.xlsx")
