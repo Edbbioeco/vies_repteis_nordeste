@@ -26,6 +26,4 @@ caminho <- "repteis_caatinga" |>
                               path = tempfile(fileext = ".csv")) |>
   dplyr::pull(local_path)
 
-inaturalist <- readr::read_csv(caminho,
-                               col_types = readr::cols(.default = readr::col_character()),
-                               show_col_types = FALSE)
+inaturalist <- readr::read_csv(caminho)
