@@ -116,3 +116,14 @@ sibbr_sf
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = sibbr_sf)
+
+## Recortar a área para a Caatinga ----
+
+sibbr_sf_crop <- sibbr_sf |>
+  sf::st_intersection(caa)
+
+sibbr_sf_crop
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = sibbr_sf_crop)
