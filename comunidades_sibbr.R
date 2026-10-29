@@ -89,3 +89,14 @@ sibbr |>
   dplyr::filter(!`Decimal longitude (WGS84)` |> is.na()) |>
   ggplot(aes(`Decimal longitude (WGS84)`)) +
   geom_histogram()
+
+### Gráfico ----
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_point(data = sibbr |>
+               dplyr::mutate(dplyr::across(.cols = dplyr::contains("itude"),
+                                           .fns = ~.x |> as.numeric())) |>
+               dplyr::filter(!`Decimal longitude (WGS84)` |> is.na() &
+                               !`Decimal latitude (WGS84)` |> is.na()),
+             aes(`Decimal longitude (WGS84)`, `Decimal latitude (WGS84)`))
