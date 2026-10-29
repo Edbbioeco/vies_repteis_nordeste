@@ -115,7 +115,7 @@ sibbr_sf
 
 ggplot() +
   geom_sf(data = caa, color = "black") +
-  geom_sf(data = sibbr_sf)
+  geom_sf(data = sibbr_sf, aes(color = Order))
 
 ## Recortar a área para a Caatinga ----
 
