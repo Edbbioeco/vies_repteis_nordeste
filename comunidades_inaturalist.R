@@ -27,3 +27,10 @@ caminho <- "repteis_caatinga" |>
   dplyr::pull(local_path)
 
 inaturalist <- readr::read_csv(caminho)
+
+
+### Visualizar dados ----
+
+inaturalist
+
+inaturalist |> dplyr::glimpse()
