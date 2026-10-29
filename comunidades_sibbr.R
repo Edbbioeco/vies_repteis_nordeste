@@ -107,7 +107,8 @@ sibbr_sf <- sibbr |>
   dplyr::mutate(dplyr::across(.cols = dplyr::contains("itude"),
                               .fns = ~.x |> as.numeric()))|>
   dplyr::filter(!`Decimal longitude (WGS84)` |> is.na() &
-                  !`Decimal latitude (WGS84)` |> is.na()) |>
+                  !`Decimal latitude (WGS84)` |> is.na() &
+                  !Order |> is.na()) |>
   sf::st_as_sf(coords = c("Decimal longitude (WGS84)", "Decimal latitude (WGS84)"),
                crs = 4674)
 
