@@ -35,3 +35,10 @@ sibbr <- readr::read_csv(caminho,
 sibbr
 
 sibbr |> dplyr::glimpse()
+
+## Shapefile da caatinga ----
+
+### Importar ----
+
+caa <- sf::st_read("biomas.gpkg") |>
+  dplyr::filter(name_biome == "Caatinga")
