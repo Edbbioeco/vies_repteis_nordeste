@@ -115,3 +115,10 @@ inaturalist_sf_crop
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = inaturalist_sf_crop, aes(color = taxon_order_name))
+
+## Listar espécies ----
+
+inaturalist_sf_crop |>
+  dplyr::filter(!taxon_species_name |> is.na()) |>
+  dplyr::pull(taxon_species_name) |>
+  unique()
