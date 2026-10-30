@@ -157,3 +157,9 @@ herpetohelp_sf_coord
 ## Exportar data frame ----
 
 herpetohelp_sf_coord |> writexl::write_xlsx("registros_herpetohelp.xlsx")
+
+## Subir para o Google Drive ----
+
+"registros_herpetohelp.xlsx" |>
+  googledrive::drive_upload(path = "repteis_caatinga",
+                            name = "registros_herpetohelp.xlsx")
