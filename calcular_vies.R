@@ -37,3 +37,27 @@ library(spdep)
 ## Ativar Google Drive ----
 
 googledrive::drive_auth("edson.nilton@ufpe.br")
+
+## Importar os dados ----
+
+registros <- purrr::map_dfr(
+  c("gbif",
+    "sibbr",
+    "specieslink",
+    "inaturalist",
+    "herpetohelp"),
+  \(reg){
+
+    "repteis_caatinga" |>
+      googledrive::drive_get() |>
+      googledrive::drive_ls() |>
+      dplyr::filter(name == paste0("registros_",
+                                   reg,
+                                   ".xlsx")) |>
+      googledrive::drive_download(file = _,
+                                  path = tempfile(fileext = ".xlsx")) |>
+      dplyr::pull(local_path) |>
+      readxl::read_xlsx()
+
+    },
+  .progress = TRUE)
