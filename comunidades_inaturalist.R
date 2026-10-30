@@ -161,3 +161,7 @@ inaturalist_sf_coord <- inaturalist_sf_crop |>
   sf::st_drop_geometry()
 
 inaturalist_sf_coord
+
+## Exportar data frame ----
+
+inaturalist_sf_coord |> writexl::write_xlsx("registros_inaturalist.xlsx")
