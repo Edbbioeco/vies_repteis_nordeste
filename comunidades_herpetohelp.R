@@ -50,3 +50,35 @@ caa
 
 ggplot() +
   geom_sf(data = caa, color = "black")
+
+# Recortar os registros para a Caatinga ----
+
+## Tratar as coordenadas ----
+
+### Checar a aquantidade de dígitos de latitude e longitude ----
+
+herpetohelp |>
+  dplyr::filter(!`Latitude original` |> is.na()) |>
+  dplyr::pull(`Latitude original`) |>
+  as.character() |>
+  nchar() |>
+  unique() |>
+  sort()
+
+herpetohelp |>
+  dplyr::filter(!`Latitude original` |> is.na()) |>
+  ggplot(aes(`Latitude original`)) +
+  geom_histogram()
+
+herpetohelp |>
+  dplyr::filter(!`Longitude original` |> is.na()) |>
+  dplyr::pull(`Longitude original`) |>
+  as.character() |>
+  nchar() |>
+  unique() |>
+  sort()
+
+herpetohelp |>
+  dplyr::filter(!`Longitude original` |> is.na()) |>
+  ggplot(aes(`Longitude original`)) +
+  geom_histogram()
