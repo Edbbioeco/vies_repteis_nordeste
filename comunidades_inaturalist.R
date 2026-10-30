@@ -165,3 +165,9 @@ inaturalist_sf_coord
 ## Exportar data frame ----
 
 inaturalist_sf_coord |> writexl::write_xlsx("registros_inaturalist.xlsx")
+
+## Subir para o Google Drive ----
+
+"registros_inaturalist.xlsx" |>
+  googledrive::drive_upload(path = "repteis_caatinga",
+                            name = "registros_inaturalist.xlsx")
