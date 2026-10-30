@@ -29,3 +29,9 @@ caminho <- "repteis_caatinga" |>
   dplyr::pull(local_path)
 
 herpetohelp <- readxl::read_xlsx(caminho)
+
+### Visualizar dados ----
+
+herpetohelp
+
+herpetohelp |> dplyr::glimpse()
