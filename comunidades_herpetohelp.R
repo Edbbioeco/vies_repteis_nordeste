@@ -89,3 +89,17 @@ ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_point(data = herpetohelp,
              aes(`Longitude original`, `Latitude original`))
+
+## Transformar os registros em shapefile ----
+
+herpetohelp_sf <- herpetohelp |>
+  sf::st_as_sf(coords = c("Longitude original", "Latitude original"),
+               crs = 4674)
+
+herpetohelp_sf
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = herpetohelp_sf |>
+            dplyr::filter(Ordem %notin% c("Anura", "Gymnophiona")),
+          aes(color = Ordem))
