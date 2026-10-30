@@ -104,3 +104,14 @@ inaturalist_sf
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = inaturalist_sf, aes(color = taxon_order_name))
+
+## Recortar a área para a Caatinga ----
+
+inaturalist_sf_crop <- inaturalist_sf |>
+  sf::st_intersection(caa)
+
+inaturalist_sf_crop
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = inaturalist_sf_crop, aes(color = taxon_order_name))
