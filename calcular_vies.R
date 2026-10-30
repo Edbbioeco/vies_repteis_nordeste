@@ -57,7 +57,8 @@ registros <- purrr::map_dfr(
       googledrive::drive_download(file = _,
                                   path = tempfile(fileext = ".xlsx")) |>
       dplyr::pull(local_path) |>
-      readxl::read_xlsx()
+      readxl::read_xlsx() |>
+      dplyr::mutate(source = reg)
 
     },
   .progress = TRUE)
