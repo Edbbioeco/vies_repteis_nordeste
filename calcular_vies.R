@@ -31,3 +31,9 @@ library(tidyterra)
 library(patchwork)
 
 library(spdep)
+
+# Registros de ocorrência ----
+
+## Ativar Google Drive ----
+
+googledrive::drive_auth("edson.nilton@ufpe.br")
