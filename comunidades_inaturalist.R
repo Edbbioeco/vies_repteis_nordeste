@@ -122,3 +122,25 @@ inaturalist_sf_crop |>
   dplyr::filter(!taxon_species_name |> is.na()) |>
   dplyr::pull(taxon_species_name) |>
   unique()
+
+## Excluir espécies de fora da Caatinga ----
+
+inaturalist_sf_crop <- inaturalist_sf_crop |>
+  dplyr::filter(!taxon_species_name %in% c(
+    "Bothrops atrox",
+    "Corallus caninus",
+    "Chironius scurrula",
+    "Cercosaura ocellata",
+    "Trachemys dorbigni",
+    "Micrurus paraensis",
+    "Podocnemis unifilis",
+    "Podocnemis expansa",
+    "Cnemidophorus cryptus",
+    "Bothrops alternatus"
+  ))
+
+inaturalist_sf_crop
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = inaturalist_sf_crop, aes(color = taxon_order_name))
