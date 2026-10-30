@@ -200,7 +200,7 @@ specieslink_sf_coord <- specieslink_sf_crop |>
   dplyr::select(order,
                 family,
                 genus,
-                scientificname = species,
+                species = scientificname,
                 Longitude,
                 Latitude) |>
   sf::st_drop_geometry()
