@@ -89,3 +89,18 @@ ggplot() +
                dplyr::filter(!longitude |> is.na() &
                                !latitude |> is.na()),
              aes(longitude, latitude))
+
+## Transformar os registros em shapefile ----
+
+inaturalist_sf <- inaturalist |>
+  dplyr::filter(!longitude |> is.na() &
+                  !latitude |> is.na() &
+                  !taxon_order_name |> is.na()) |>
+  sf::st_as_sf(coords = c("longitude", "latitude"),
+               crs = 4674)
+
+inaturalist_sf
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = inaturalist_sf, aes(color = taxon_order_name))
