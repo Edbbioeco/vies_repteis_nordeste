@@ -82,3 +82,10 @@ herpetohelp |>
   dplyr::filter(!`Longitude original` |> is.na()) |>
   ggplot(aes(`Longitude original`)) +
   geom_histogram()
+
+### Gráfico ----
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_point(data = herpetohelp,
+             aes(`Longitude original`, `Latitude original`))
