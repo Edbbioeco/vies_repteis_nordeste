@@ -144,3 +144,20 @@ inaturalist_sf_crop
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_sf(data = inaturalist_sf_crop, aes(color = taxon_order_name))
+
+## Extrair as coordenadas ----
+
+inaturalist_sf_coord <- inaturalist_sf_crop |>
+  dplyr::mutate(sf::st_coordinates(geometry) |>
+                  as.data.frame() |>
+                  dplyr::rename("Longitude" = X,
+                                "Latitude" = Y),
+                genus = taxon_species_name |> stringr::word(1)) |>
+  dplyr::select(order = taxon_order_name,
+                family = taxon_family_name,
+                species = taxon_species_name,
+                Longitude,
+                Latitude) |>
+  sf::st_drop_geometry()
+
+inaturalist_sf_coord
