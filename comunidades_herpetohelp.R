@@ -17,3 +17,15 @@ library(writexl)
 ### Ativar Google Drive ----
 
 googledrive::drive_auth("edson.nilton@ufpe.br")
+
+### Importar dados ----
+
+caminho <- "repteis_caatinga" |>
+  googledrive::drive_get() |>
+  googledrive::drive_ls() |>
+  dplyr::filter(name |> stringr::str_detect("^herpetohelp")) |>
+  googledrive::drive_download(file = _,
+                              path = tempfile(fileext = ".xlsx")) |>
+  dplyr::pull(local_path)
+
+herpetohelp <- readxl::read_xlsx(caminho)
