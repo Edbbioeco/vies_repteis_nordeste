@@ -110,3 +110,27 @@ herpetohelp_sf |>
   dplyr::filter(Ordem %notin% c("Anura", "Gymnophiona")) |>
   dplyr::pull(Espécie) |>
   unique()
+
+## Excluir espécies de fora da Caatinga ----
+
+herpetohelp_sf <- herpetohelp_sf |>
+  dplyr::filter(!Espécie %in% c(
+    "Amphisbaena bedai",
+    "Chironius scurrula",
+    "Helicops nentur",
+    "Phalotris mertensi",
+    "Micrurus paraensis",
+    "Rhachisaurus brachylepis",
+    "Vanzosaura rubricauda",
+    "Cnemidophorus cryptus",
+    "Bothrops atrox",
+    "Bothrops marmoratus"
+  ))
+
+herpetohelp_sf
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_sf(data = herpetohelp_sf |>
+            dplyr::filter(Ordem %notin% c("Anura", "Gymnophiona")),
+          aes(color = Ordem))
