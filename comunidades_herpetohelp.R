@@ -28,7 +28,8 @@ caminho <- "repteis_caatinga" |>
                               path = tempfile(fileext = ".xlsx")) |>
   dplyr::pull(local_path)
 
-herpetohelp <- readxl::read_xlsx(caminho)
+herpetohelp <- readxl::read_xlsx(caminho,
+                                 sheet = 2)
 
 ### Visualizar dados ----
 
