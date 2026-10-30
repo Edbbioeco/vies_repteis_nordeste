@@ -84,3 +84,30 @@ ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_point(data = registros,
              aes(Longitude, Latitude, color = order))
+
+# Gazetteers ----
+
+## Importar ----
+
+gaz <- "repteis_caatinga" |>
+  googledrive::drive_get() |>
+  googledrive::drive_ls() |>
+  dplyr::filter(name  |> stringr::str_detect("^gaz_")) |>
+  dplyr::pull(name) |>
+  purrr::map(
+    \(gaz){
+
+      gaz |>
+        googledrive::drive_download(file = _,
+                                    path = tempfile(fileext = ".shp")) |>
+        dplyr::pull(local_path) |>
+        sf::st_read()
+
+      },
+    .progress = TRUE) |>
+  setNames("repteis_caatinga" |>
+             googledrive::drive_get() |>
+             googledrive::drive_ls() |>
+             dplyr::filter(name  |> stringr::str_detect("^gaz_")) |>
+             dplyr::pull(name) |>
+             stringr::str_remove_all("gaz_|.gpkg"))
