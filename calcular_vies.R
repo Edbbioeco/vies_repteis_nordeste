@@ -111,3 +111,17 @@ gaz <- "repteis_caatinga" |>
              dplyr::filter(name  |> stringr::str_detect("^gaz_")) |>
              dplyr::pull(name) |>
              stringr::str_remove_all("gaz_|.gpkg"))
+
+## Visualizar ----
+
+gaz
+
+purrr::map(
+  gaz,
+  \(gaz){
+
+    ggplot() +
+      geom_sf(data = gaz)
+
+    },
+  .progress = TRUE)
