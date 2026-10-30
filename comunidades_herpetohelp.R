@@ -153,3 +153,7 @@ herpetohelp_sf_coord <- herpetohelp_sf |>
   sf::st_drop_geometry()
 
 herpetohelp_sf_coord
+
+## Exportar data frame ----
+
+herpetohelp_sf_coord |> writexl::write_xlsx("registros_herpetohelp.xlsx")
