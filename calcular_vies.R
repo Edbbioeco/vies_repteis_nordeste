@@ -62,3 +62,9 @@ registros <- purrr::map_dfr(
 
     },
   .progress = TRUE)
+
+## Visualizar dados ----
+
+registros
+
+registros |> dplyr::glimpse()
