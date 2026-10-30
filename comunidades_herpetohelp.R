@@ -103,3 +103,10 @@ ggplot() +
   geom_sf(data = herpetohelp_sf |>
             dplyr::filter(Ordem %notin% c("Anura", "Gymnophiona")),
           aes(color = Ordem))
+
+## Listar espécies ----
+
+herpetohelp_sf |>
+  dplyr::filter(Ordem %notin% c("Anura", "Gymnophiona")) |>
+  dplyr::pull(Espécie) |>
+  unique()
