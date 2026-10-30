@@ -51,10 +51,10 @@ ggplot() +
 
 ## Exportar ----
 
-rios_caa |> sf::st_write("rios_caa.gpkg")
+rios_caa |> sf::st_write("gaz_rios.gpkg")
 
 ## Enviar para o Google Drive ----
 
-"rios_caa.gpkg" |>
+"gaz_rios.gpkg" |>
   googledrive::drive_upload(path = "repteis_caatinga",
-                            name = "rios_caa.gpkg")
+                            name = "gaz_rios.gpkg")
