@@ -68,3 +68,10 @@ registros <- purrr::map_dfr(
 registros
 
 registros |> dplyr::glimpse()
+
+# Shapefile da Caatinga ----
+
+## Importar ----
+
+caa <- sf::st_read("biomas.gpkg") |>
+  dplyr::filter(name_biome == "Caatinga")
