@@ -120,7 +120,8 @@ purrr::map(
   gaz,
   \(gaz){
 
-    ggplot() +
+    ggplot() ++
+      geom_sf(data = caa) +
       geom_sf(data = gaz)
 
     },
