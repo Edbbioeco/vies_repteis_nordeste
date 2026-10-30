@@ -215,4 +215,5 @@ specieslink_sf_coord |> writexl::write_xlsx("registros_specieslink.xlsx")
 
 "registros_specieslink.xlsx" |>
   googledrive::drive_upload(path = "repteis_caatinga",
-                            name = "registros_specieslink.xlsx")
+                            name = "registros_specieslink.xlsx",
+                            overwrite = TRUE)
