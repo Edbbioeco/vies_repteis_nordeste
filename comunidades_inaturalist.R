@@ -80,3 +80,12 @@ inaturalist |>
   dplyr::filter(!longitude |> is.na()) |>
   ggplot(aes(longitude)) +
   geom_histogram()
+
+### Gráfico ----
+
+ggplot() +
+  geom_sf(data = caa, color = "black") +
+  geom_point(data = inaturalist |>
+               dplyr::filter(!longitude |> is.na() &
+                               !latitude |> is.na()),
+             aes(longitude, latitude))
