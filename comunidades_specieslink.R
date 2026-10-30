@@ -94,7 +94,7 @@ specieslink |>
 
 ggplot() +
   geom_sf(data = caa, color = "black") +
-  geom_point(data = gbif |>
+  geom_point(data = specieslink |>
                dplyr::mutate(dplyr::across(.cols = dplyr::contains("itude"),
                                            .fns = ~.x |> as.numeric())) |>
                dplyr::filter(!longitude |> is.na() &
