@@ -134,3 +134,22 @@ ggplot() +
   geom_sf(data = herpetohelp_sf |>
             dplyr::filter(Ordem %notin% c("Anura", "Gymnophiona")),
           aes(color = Ordem))
+
+## Extrair as coordenadas ----
+
+herpetohelp_sf_coord <- herpetohelp_sf |>
+  dplyr::filter(Ordem %notin% c("Anura", "Gymnophiona")) |>
+  dplyr::mutate(sf::st_coordinates(geometry) |>
+                  as.data.frame() |>
+                  dplyr::rename("Longitude" = X,
+                                "Latitude" = Y),
+                genus = Espécie |> stringr::word(1)) |>
+  dplyr::select(order = Ordem,
+                family = Família,
+                genus,
+                species = Espécie,
+                Longitude,
+                Latitude) |>
+  sf::st_drop_geometry()
+
+herpetohelp_sf_coord
