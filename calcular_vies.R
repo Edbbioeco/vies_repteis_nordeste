@@ -197,3 +197,29 @@ purrr::map(
 
     },
   .progress = TRUE)
+
+## Importar modelos ----
+
+modelos_vies <- purrr::map(
+  c("Crocodylia", "Testudines", "Squamata"),
+  \(ordem){
+
+    modelo <- paste0("modelo_vies_", ordem, ".rds") |>
+      googledrive::drive_download(file = _,
+                                  path = tempfile(fileext = ".rds")) |>
+      dplyr::pull(local_path) |>
+      readr::read_rds()
+
+    modelo$summa$extent <- modelo$summa$extent |> terra::ext()
+
+    modelo$occurrences <- modelo$occurrences |> terra::unwrap()
+
+    modelo$distance_rasters <- modelo$distance_rasters |> terra::unwrap()
+
+    modelo
+
+    },
+  .progress = TRUE) |>
+  setNames(c("Crocodylia", "Testudines", "Squamata"))
+
+modelos_vies
