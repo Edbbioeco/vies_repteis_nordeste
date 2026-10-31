@@ -59,8 +59,8 @@ registros <- purrr::map_dfr(
       dplyr::pull(local_path) |>
       readxl::read_xlsx() |>
       dplyr::mutate(source = reg) |>
-      dplyr::rename("decimalLongitude" = longitude,
-                    "decimalLatitude" = latitude)
+      dplyr::rename("decimalLongitude" = Longitude,
+                    "decimalLatitude" = Latitude)
 
     },
   .progress = TRUE)
