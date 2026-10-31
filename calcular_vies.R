@@ -246,3 +246,12 @@ df_pesos <- purrr::imap_dfr(
   .progress = TRUE)
 
 df_pesos
+
+## Calcular médias ----
+
+### Sem fator ----
+
+df_pesos |>
+  dplyr::summarise(media = `Bias weight` |> mean() |> round(2),
+                   sd = `Bias weight` |> sd() |> round(2),
+                   .by = Order)
