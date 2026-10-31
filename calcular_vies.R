@@ -264,3 +264,42 @@ df_pesos_media <- df_pesos |>
                    .by = c(Order, Factor))
 
 df_pesos_media
+
+## Criar gráfico ----
+
+df_pesos |>
+  dplyr::mutate(Order = Order |>
+                  forcats::fct_relevel(c("Crocodylia",
+                                         "Testudines",
+                                         "Squamata")),
+                Factor = tidytext::reorder_within(Factor, `Bias weight`, Order)) |>
+  ggplot(aes(`Bias weight`, Factor)) +
+  ggbeeswarm::geom_quasirandom() +
+  geom_point(data = df_pesos_media,
+             aes(`Bias weight`, Factor),
+             size = 2.5,
+             color = "red") +
+  geom_errorbar(data = df_pesos_media,
+                aes(xmin = `Bias weight` - sd,
+                    xmax = `Bias weight` + sd,
+                    y = Factor),
+                linewidth = 1,
+                color = "red") +
+  facet_wrap(~Order, ncol = 1, scales = "free") +
+  tidytext::scale_y_reordered() +
+  labs(y = "Gazetteer") +
+  theme_bw() +
+  theme(axis.text = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 15, color = "black"),
+        axis.title = element_text(size = 20, color = "black"),
+        legend.text = element_text(size = 20, color = "black"),
+        legend.title = element_text(size = 20, color = "black"),
+        legend.position = "bottom",
+        strip.text = element_text(size = 30, color = "black"),
+        strip.background = element_rect(color = "black",
+                                        linewidth = 1),
+        panel.background = element_rect(linewidth = 1,
+                                        color = "black"),
+        plot.title = element_text(size = 20, color = "black"),
+        plot.subtitle = element_text(size = 17.5, color = "black"),
+        plot.margin = margin(t = 5, r = 15, b = 5, l = 5))
