@@ -148,3 +148,21 @@ caa_rast
 
 caa_rast |> plot()
 
+## Calcular viés por ordem ----
+
+vies_ordem <- purrr::map(
+  c("Crocodylia", "Testudines", "Squamata"),
+  \(ordem){
+
+    registros |>
+      dplyr::filter(order == ordem) |>
+      sampbias::calculate_bias(gaz = gaz,
+                               inp_raster = caa_rast,
+                               res = (10 / 111.3194),
+                               terrestrial = TRUE)
+
+  },
+  .progress = TRUE) |>
+  setNames(c("Crocodylia", "Testudines", "Squamata"))
+
+vies_ordem
