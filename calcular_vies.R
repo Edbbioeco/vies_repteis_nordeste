@@ -166,3 +166,21 @@ vies_ordem <- purrr::map(
   setNames(c("Crocodylia", "Testudines", "Squamata"))
 
 vies_ordem
+
+## Exportar os modelos ----
+
+purrr::imap(
+  vies_ordem,
+  \(modelo, ordem){
+
+    modelo$summa$extent <- modelo$summa$extent |> as.vector()
+
+    modelo$occurrences <- modelo$occurrences |> terra::wrap()
+
+    modelo$distance_rasters <- modelo$distance_rasters |> terra::wrap()
+
+    modelo |>
+      readr::write_rds(file = paste0("modelo_vies_", ordem, ".rds"))
+
+  },
+  .progress = TRUE)
