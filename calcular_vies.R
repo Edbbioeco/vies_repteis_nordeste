@@ -193,7 +193,8 @@ purrr::map(
 
     modelo |>
       googledrive::drive_upload(path = "repteis_caatinga",
-                                media = modelo)
+                                media = modelo,
+                                overwrite = TRUE)
 
     },
   .progress = TRUE)
