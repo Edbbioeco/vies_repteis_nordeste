@@ -58,7 +58,9 @@ registros <- purrr::map_dfr(
                                   path = tempfile(fileext = ".xlsx")) |>
       dplyr::pull(local_path) |>
       readxl::read_xlsx() |>
-      dplyr::mutate(source = reg)
+      dplyr::mutate(source = reg) |>
+      dplyr::rename("decimalLongitude" = longitude,
+                    "decimalLatitude" = latitude)
 
     },
   .progress = TRUE)
@@ -144,3 +146,4 @@ caa_rast <- terra::rast(caa |>
 caa_rast
 
 caa_rast |> plot()
+
