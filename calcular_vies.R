@@ -261,7 +261,12 @@ df_pesos |>
 df_pesos_media <- df_pesos |>
   dplyr::summarise(sd = `Bias weight` |> sd() |> round(2),
                    `Bias weight` = `Bias weight` |> mean() |> round(2),
-                   .by = c(Order, Factor))
+                   .by = c(Order, Factor)) |>
+  dplyr::mutate(Order = Order |>
+                  forcats::fct_relevel(c("Crocodylia",
+                                         "Testudines",
+                                         "Squamata")),
+                Factor = tidytext::reorder_within(Factor, `Bias weight`, Order))
 
 df_pesos_media
 
