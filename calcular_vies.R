@@ -259,8 +259,8 @@ df_pesos |>
 ### Com fator ----
 
 df_pesos_media <- df_pesos |>
-  dplyr::summarise(media = `Bias weight` |> mean() |> round(2),
-                   sd = `Bias weight` |> sd() |> round(2),
+  dplyr::summarise(sd = `Bias weight` |> sd() |> round(2),
+                   `Bias weight` = `Bias weight` |> mean() |> round(2),
                    .by = c(Order, Factor))
 
 df_pesos_media
