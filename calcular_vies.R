@@ -259,8 +259,8 @@ df_pesos |>
 ### Com fator ----
 
 df_pesos_media <- df_pesos |>
-  dplyr::summarise(sd = `Bias weight` |> sd() |> round(2),
-                   `Bias weight` = `Bias weight` |> mean() |> round(2),
+  dplyr::summarise(sd = `Bias weight` |> sd(),
+                   `Bias weight` = `Bias weight` |> mean(),
                    .by = c(Order, Factor)) |>
   dplyr::mutate(Order = Order |>
                   forcats::fct_relevel(c("Crocodylia",
