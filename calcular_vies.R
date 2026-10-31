@@ -308,3 +308,9 @@ df_pesos |>
         plot.title = element_text(size = 20, color = "black"),
         plot.subtitle = element_text(size = 17.5, color = "black"),
         plot.margin = margin(t = 5, r = 15, b = 5, l = 5))
+
+ggsave(filename = "grafico_distribuição_pesos.png", height = 12, width = 12)
+
+"grafico_distribuição_pesos.png" |>
+  googledrive::drive_upload(path = "repteis_caatinga",
+                            name = "grafico_distribuição_pesos.png")
