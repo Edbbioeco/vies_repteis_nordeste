@@ -126,3 +126,21 @@ purrr::map(
 
     },
   .progress = TRUE)
+
+# Calcular viés ----
+
+## Criar molde ----
+
+caa_rast <- terra::rast(caa |>
+                          terra::vect() |>
+                          terra::ext(),
+                        resolution = (10 / 111.3194),
+                        crs = "EPSG:4326") |>
+  terra::rasterize(caa |>
+                     terra::vect(),
+                   y = _,
+                   field = 1)
+
+caa_rast
+
+caa_rast |> plot()
