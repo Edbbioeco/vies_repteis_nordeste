@@ -103,7 +103,7 @@ gaz <- "repteis_caatinga" |>
         googledrive::drive_download(file = _,
                                     path = tempfile(fileext = ".shp")) |>
         dplyr::pull(local_path) |>
-        sf::st_read()
+        terra::vect()
 
       },
     .progress = TRUE) |>
