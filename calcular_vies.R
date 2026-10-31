@@ -313,4 +313,5 @@ ggsave(filename = "grafico_distribuição_pesos.png", height = 12, width = 12)
 
 "grafico_distribuição_pesos.png" |>
   googledrive::drive_upload(path = "repteis_caatinga",
-                            name = "grafico_distribuição_pesos.png")
+                            name = "grafico_distribuição_pesos.png",
+                            overwrite = TRUE)
