@@ -290,7 +290,7 @@ df_pesos |>
                     y = Factor),
                 linewidth = 1,
                 color = "red") +
-  facet_wrap(~Order, ncol = 1, scales = "free") +
+  facet_wrap(~Order, ncol = 1, scales = "free_y") +
   tidytext::scale_y_reordered() +
   labs(y = "Gazetteer") +
   theme_bw() +
