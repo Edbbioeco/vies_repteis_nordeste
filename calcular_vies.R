@@ -530,3 +530,30 @@ purrr::map(
 
   },
   .progress = TRUE)
+
+### Importar do Google Drive ----
+
+modelos_quebra <- purrr::map(
+  "repteis_caatinga" |>
+    googledrive::drive_get() |>
+    googledrive::drive_ls() |>
+    dplyr::filter(name |> stringr::str_detect("_quebra.rds$")) |>
+    dplyr::pull(name),
+  \(modelo){
+
+    modelo |>
+      googledrive::drive_download(file = _,
+                                  path = tempfile(fileext = ".rds")) |>
+      dplyr::pull(local_path) |>
+      readr::read_rds()
+
+  },
+  .progress = TRUE) |>
+  setNames("repteis_caatinga" |>
+             googledrive::drive_get() |>
+             googledrive::drive_ls() |>
+             dplyr::filter(name |> stringr::str_detect("_quebra.rds$")) |>
+             dplyr::pull(name) |>
+             stringr::str_remove_all("modelo_|_quebra.rds"))
+
+modelos_quebra
