@@ -316,3 +316,21 @@ ggsave(filename = "grafico_distribuição_pesos.png", height = 12, width = 12)
   googledrive::drive_upload(path = "repteis_caatinga",
                             name = "grafico_distribuição_pesos.png",
                             overwrite = TRUE)
+
+# Taxa de amostragem por MCMC ----
+
+## Valor máximo de distância geodésica possível na Caatinga ----
+
+dist_caa <- caa |>
+  sf::st_boundary() |>
+  sf::st_cast("POINT") |>
+  sf::st_coordinates() |>
+  as.data.frame() |>
+  dplyr::arrange(dplyr::desc(Y)) |>
+  dplyr::slice(c(1, dplyr::n())) |>
+  sf::st_as_sf(coords = c(1:2), crs = 4674) |>
+  sf::st_distance() |>
+  max() |>
+  as.numeric() / 1e3
+
+dist_caa
