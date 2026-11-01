@@ -382,3 +382,11 @@ df_sr <- purrr::imap_dfr(
   .progress = TRUE)
 
 df_sr
+
+## Média dos valores de sampling rate ----
+
+df_sr |>
+  dplyr::summarise(media = `Factor sampling rate` |> mean(),
+                   sd = `Factor sampling rate` |> sd(),
+                   .by = Order)
+
