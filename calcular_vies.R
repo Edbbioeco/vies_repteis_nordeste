@@ -605,3 +605,19 @@ sts_dist_davies |>
                    sd = Distance |> sd() |> round(7),
                    .by = Factor) |>
   dplyr::arrange(media)
+
+## Tabela flextable ----
+
+sts_dist_davies_flex <- sts_dist_davies |>
+  flextable::flextable() |>
+  flextable::align(align = "center", part = "all")
+
+sts_dist_davies_flex
+
+sts_dist_davies_flex |>
+  flextable::save_as_docx(path = "sts_dist_davies.docx")
+
+"sts_dist_davies.docx" |>
+  googledrive::drive_upload(path = "repteis_caatinga",
+                            name = "sts_dist_davies.docx",
+                            overwrite = TRUE)
