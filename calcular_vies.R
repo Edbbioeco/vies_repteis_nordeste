@@ -355,3 +355,30 @@ medias_vies
 dist_caa_vetor <- seq(0, dist_caa, 0.1)
 
 dist_caa_vetor
+
+## Data frame dos valores preditos de sampling rate ----
+
+df_sr <- purrr::imap_dfr(
+  medias_vies,
+  \(medias, ordem){
+
+    purrr::map(
+      5:9,
+      \(vetor){
+
+        nome <- medias[vetor] |> names()
+
+        tibble::tibble(
+          `Min distance to the factor (km)` = dist_caa_vetor,
+          `Factor sampling rate` = medias[["q"]] * exp(-medias[[nome]] * `Min distance to the factor (km)`),
+          Factor = nome |> stringr::str_remove("w_"),
+          Order = ordem
+        )
+
+        }
+    )
+
+    },
+  .progress = TRUE)
+
+df_sr
