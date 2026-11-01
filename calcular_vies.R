@@ -432,3 +432,18 @@ purrr::imap(
 
     },
   .progress = TRUE)
+
+### Subir para o Google Drive ----
+
+purrr::map(
+  list.files(pattern = "_seg.rds$"),
+  \(modelo){
+
+    modelo |>
+      googledrive::drive_upload(path = "repteis_caatinga",
+                                name = modelo,
+                                overwrite = TRUE)
+
+    },
+  .progress = TRUE)
+
