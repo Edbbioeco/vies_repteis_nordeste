@@ -422,3 +422,14 @@ modelos_seq <- purrr::pmap(
       dplyr::pull(nome))
 
 modelos_seq
+
+### Exportar modelos ----
+
+purrr::imap(
+  modelos_seq,
+  \(modelo, id){
+
+    modelo |> readr::write_rds(paste("modelo_", id, "_seg.rds"))
+
+    },
+  .progress = TRUE)
