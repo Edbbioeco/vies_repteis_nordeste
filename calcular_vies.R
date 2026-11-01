@@ -621,3 +621,58 @@ sts_dist_davies_flex |>
   googledrive::drive_upload(path = "repteis_caatinga",
                             name = "sts_dist_davies.docx",
                             overwrite = TRUE)
+
+## Gráfico ----
+
+df_sr |>
+  dplyr::mutate(Order = Order |>
+                  forcats::fct_relevel(c("Crocodylia",
+                                         "Testudines",
+                                         "Squamata")),
+                Factor = Factor |> stringr::str_replace("\\.",
+                                                        " ")) |>
+  ggplot(aes(`Min distance to the factor (km)`, `Factor sampling rate`,
+             color = Factor)) +
+  geom_line(linewidth = 2) +
+  geom_vline(data = sts_dist_davies |>
+               dplyr::mutate(Order = Order |>
+                               forcats::fct_relevel(c("Crocodylia",
+                                                      "Testudines",
+                                                      "Squamata"))),
+             aes(xintercept = Distance, color = Factor),
+             linetype = "dashed",
+             linewidth = 1) +
+  scale_color_manual(breaks = c("rios",
+                                "uc",
+                                "eolica",
+                                "rod",
+                                "urb"),
+                     values = c("blue",
+                                "forestgreen",
+                                "gold4",
+                                "black",
+                                "orange")) +
+  guides(color = guide_legend(title.position = "top",
+                              title.hjust = 0.5)) +
+  facet_wrap(~Order, ncol = 1, scales = "free_y") +
+  scale_x_continuous(breaks = seq(0, 1500, 100)) +
+  theme_bw() +
+  theme(axis.text = element_text(size = 20, color = "black"),
+        axis.title = element_text(size = 20, color = "black"),
+        legend.text = element_text(size = 20, color = "black"),
+        legend.title = element_text(size = 20, color = "black"),
+        legend.position = "bottom",
+        strip.text = element_text(size = 30, color = "black"),
+        strip.background = element_rect(color = "black",
+                                        linewidth = 1),
+        panel.background = element_rect(linewidth = 1,
+                                        color = "black"),
+        plot.title = element_text(size = 20, color = "black"),
+        plot.subtitle = element_text(size = 17.5, color = "black"))
+
+ggsave(filename = "grafico_sampling_rate.png", height = 12, width = 12)
+
+"grafico_sampling_rate.png" |>
+  googledrive::drive_upload(path = "repteis_caatinga",
+                            name = "grafico_sampling_rate.png",
+                            overwrite = TRUE)
