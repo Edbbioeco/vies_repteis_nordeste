@@ -425,7 +425,7 @@ modelos_seg
 ### Exportar modelos ----
 
 purrr::imap(
-  modelos_seq,
+  modelos_seg,
   \(modelo, id){
 
     modelo |> readr::write_rds(paste0("modelo_", id, "_seg.rds"))
