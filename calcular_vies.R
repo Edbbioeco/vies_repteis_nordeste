@@ -394,13 +394,12 @@ df_sr |>
 
 ### Criar os modelos ----
 
-modelos_seq <- tidyr::expand_grid(
-  ordem = c("Crocodylia",
-            "Testudines",
-            "Squamata"),
-  gaz = df_sr$Factor) |>
-  purrr::set_names(paste0(ordem, "_", gaz)) |>
-  purrr::pmap(
+modelos_seq <- purrr::pmap(
+    tidyr::expand_grid(
+      ordem = c("Crocodylia",
+                "Testudines",
+                "Squamata"),
+      gaz = df_sr$Factor),
     \(ordem, gaz){
 
     dados <- df_sr |>
@@ -413,6 +412,13 @@ modelos_seq <- tidyr::expand_grid(
 
     },
   .progress = TRUE) |>
-  purrr::flatten()
+  purrr::flatten() |>
+  setNames(tidyr::expand_grid(
+    ordem = c("Crocodylia",
+              "Testudines",
+              "Squamata"),
+    gaz = df_sr$Factor) |>
+      dplyr::mutate(nome = paste0(ordem, "_", gaz)) |>
+      dplyr::pull(nome))
 
 modelos_seq
