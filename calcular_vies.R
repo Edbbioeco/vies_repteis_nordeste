@@ -505,3 +505,14 @@ modelos_quebra <- purrr::pmap(
       dplyr::pull(nome))
 
 modelos_quebra
+
+### Exportar modelos ----
+
+purrr::imap(
+  modelos_quebra,
+  \(modelo, id){
+
+    modelo |> readr::write_rds(paste0("modelo_", id, "_quebra.rds"))
+
+  },
+  .progress = TRUE)
