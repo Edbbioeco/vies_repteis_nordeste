@@ -557,3 +557,35 @@ modelos_quebra <- purrr::map(
              stringr::str_remove_all("modelo_|_quebra.rds"))
 
 modelos_quebra
+
+## Estatísticas dos modelos ----
+
+sts_dist_davies <- purrr::pmap_dfr(
+  list(modelos_seg,
+       modelos_quebra,
+       modelos_seg |> names()),
+  \(seg, quebra, nome){
+
+    seg |>
+      broom::tidy() |>
+      dplyr::rename("M" = 1,
+                    "p value" = 2) |>
+      dplyr::select(-c(3:5)) |>
+      dplyr::mutate(Model = nome |>
+                      stringr::str_replace("\\.", " "),
+                    .before = 1,
+                    M = M |> round(2)) |>
+      dplyr::mutate(`p value` = dplyr::case_when(
+
+        `p value` < 0.01 ~ "< 0.01",
+        .default = `p value` |> round(2) |> as.character()
+      ),
+      `Distance` = quebra$psi[1, 2] |> round(2)) |>
+      tidyr::separate(col = Model,
+                      into = c("Order", "Factor"),
+                      sep = "_")
+
+    },
+  .progress = TRUE)
+
+sts_dist_davies
