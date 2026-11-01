@@ -334,3 +334,18 @@ dist_caa <- caa |>
   as.numeric() / 1e3
 
 dist_caa
+
+## Valore médios de estimativas dos modelos ----
+
+medias_vies <- purrr::map(
+  modelos_vies,
+  \(modelo){
+
+    modelo |>
+      purrr::pluck("bias_estimate") |>
+      colMeans()
+
+    },
+  .progress = TRUE)
+
+medias_vies
