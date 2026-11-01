@@ -473,3 +473,35 @@ modelos_seg <- purrr::map(
              stringr::str_remove_all("modelo_|_seg.rds"))
 
 modelos_seg
+
+## Modelos de quebra ----
+
+### Criar os modelos ----
+
+modelos_quebra <- purrr::pmap(
+  tidyr::expand_grid(
+    ordem = c("Crocodylia",
+              "Testudines",
+              "Squamata"),
+    gaz = df_sr$Factor |> unique()),
+  \(ordem, gaz){
+
+    dados <- df_sr |>
+      dplyr::filter(Order == ordem & Factor == gaz) |>
+      dplyr::rename(sampling_rate = `Factor sampling rate`,
+                    dist = `Min distance to the factor (km)`)
+
+    lm(sampling_rate ~ dist, data = dados) |>
+      segmented::selgmented(seg.Z = ~dist, Kmax = 10, type = "bic")
+
+  },
+  .progress = TRUE) |>
+  setNames(tidyr::expand_grid(
+    ordem = c("Crocodylia",
+              "Testudines",
+              "Squamata"),
+    gaz = df_sr$Factor |> unique()) |>
+      dplyr::mutate(nome = paste0(ordem, "_", gaz)) |>
+      dplyr::pull(nome))
+
+modelos_quebra
