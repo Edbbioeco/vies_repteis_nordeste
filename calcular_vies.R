@@ -390,3 +390,29 @@ df_sr |>
                    sd = `Factor sampling rate` |> sd(),
                    .by = Order)
 
+## Modelos de segmentação ----
+
+### Criar os modelos ----
+
+modelos_seq <- tidyr::expand_grid(
+  ordem = c("Crocodylia",
+            "Testudines",
+            "Squamata"),
+  gaz = df_sr$Factor) |>
+  purrr::set_names(paste0(ordem, "_", gaz)) |>
+  purrr::pmap(
+    \(ordem, gaz){
+
+    dados <- df_sr |>
+      dplyr::filter(Order == ordem & Factor == gaz) |>
+      dplyr::rename(sampling_rate = `Factor sampling rate`,
+                    dist = `Min distance to the factor (km)`)
+
+    lm(sampling_rate ~ dist, data = dados) |>
+      segmented::davies.test(seg.Z = ~dist, k = 10)
+
+    },
+  .progress = TRUE) |>
+  purrr::flatten()
+
+modelos_seq
