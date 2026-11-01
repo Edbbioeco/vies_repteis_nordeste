@@ -429,7 +429,7 @@ purrr::imap(
   modelos_seq,
   \(modelo, id){
 
-    modelo |> readr::write_rds(paste("modelo_", id, "_seg.rds"))
+    modelo |> readr::write_rds(paste0("modelo_", id, "_seg.rds"))
 
     },
   .progress = TRUE)
