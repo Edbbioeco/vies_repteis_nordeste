@@ -349,3 +349,9 @@ medias_vies <- purrr::map(
   .progress = TRUE)
 
 medias_vies
+
+## Vetor de distância ----
+
+dist_caa_vetor <- seq(0, dist_caa, 0.1)
+
+dist_caa_vetor
