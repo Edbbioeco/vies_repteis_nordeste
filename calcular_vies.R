@@ -589,3 +589,12 @@ sts_dist_davies <- purrr::pmap_dfr(
   .progress = TRUE)
 
 sts_dist_davies
+
+## Média da menor distância pelo teste de Davies ----
+
+### Por ordem ----
+
+sts_dist_davies |>
+  dplyr::summarise(media = Distance |> mean() |> round(2),
+                   sd = Distance |> sd() |> round(2),
+                   .by = Order)
