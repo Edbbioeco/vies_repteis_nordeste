@@ -12,8 +12,6 @@ library(terra)
 
 library(sampbias)
 
-library(performance)
-
 library(broom)
 
 library(flextable)
