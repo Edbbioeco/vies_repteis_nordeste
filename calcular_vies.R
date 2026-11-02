@@ -304,10 +304,10 @@ df_pesos |>
                 linewidth = 1,
                 color = "red") +
   ggimage::geom_image(data = df_figuras |>
-                        dplyr::mutate(`Bias weight` = 0.6,
-                                      Factor = 0.5),
+                        dplyr::mutate(`Bias weight` = 0.9,
+                                      Factor = 3),
                       aes(`Bias weight`, Factor, image = figura),
-                      size = 0.5)+
+                      size = 0.75)+
   facet_wrap(~Order, ncol = 1, scales = "free_y") +
   tidytext::scale_y_reordered() +
   labs(y = "Gazetteer") +
