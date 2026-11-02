@@ -279,7 +279,10 @@ df_figuras <- tibble::tibble(figura = list.files(path = "./figuras",
                              Order = list.files(path = "./figuras",
                                                 pattern = "^figura_.*\\.png$") |>
                                stringr::str_remove_all("figura_|.png") |>
-                               stringr::str_to_title())
+                               stringr::str_to_title() |>
+                               forcats::fct_relevel(c("Crocodylia",
+                                                      "Testudines",
+                                                      "Squamata")))
 
 df_figuras
 
