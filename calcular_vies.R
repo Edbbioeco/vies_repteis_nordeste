@@ -879,3 +879,29 @@ moran_orden_var <- purrr::imap(
   purrr::flatten()
 
 moran_orden_var
+
+### Data frame dos valores de I de Moran ----
+
+df_moran <- purrr::imap_dfr(
+  moran_orden_var,
+  \(teste, nome){
+
+    tibble::tibble(Model = nome,
+                   "Moran's I" = teste$statistic |>
+                     round(2),
+                   "Rank" = teste$parameter,
+                   "p" = teste$p.value)
+
+    },
+  .progress = TRUE) |>
+  dplyr::mutate(p = dplyr::case_when(
+    p < 0.01 ~ "< 0.01",
+    .default = p |> round(2) |> as.character()
+  ),
+  Model = Model |>
+    stringr::str_replace("\n", " ")) |>
+  tidyr::separate(col = Model,
+                  into = c("Order", "Factor interaction"),
+                  sep = "_")
+
+df_moran
