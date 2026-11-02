@@ -903,3 +903,21 @@ df_moran <- purrr::imap_dfr(
                   sep = "_")
 
 df_moran
+
+### Tabela flextable ----
+
+tabela_moran <- df_moran |>
+  flextable::flextable() |>
+  flextable::align(align = "center", part = "all") |>
+  flextable::width(j = 2, width = 2) |>
+  flextable::width(j = 3, width = 1)
+
+tabela_moran
+
+tabela_moran |>
+  flextable::save_as_docx(path = "tabela_moran.docx")
+
+"tabela_moran.docx" |>
+  googledrive::drive_upload(path = "repteis_caatinga",
+                            name = "tabela_moran.docx",
+                            overwrite = TRUE)
