@@ -674,6 +674,16 @@ df_sr |>
                                 "orange")) +
   guides(color = guide_legend(title.position = "top",
                               title.hjust = 0.5)) +
+  ggimage::geom_image(data = df_figuras |>
+                        dplyr::mutate(`Min distance to the factor (km)` = 1300,
+                                      `Factor sampling rate` = c(0.075,
+                                                                 35,
+                                                                 1)),
+                      aes(`Min distance to the factor (km)`,
+                          `Factor sampling rate`,
+                          image = figura),
+                      inherit.aes = FALSE,
+                      size = 0.75) +
   facet_wrap(~Order, ncol = 1, scales = "free_y") +
   scale_x_continuous(breaks = seq(0, 1500, 100)) +
   theme_bw() +
