@@ -22,7 +22,7 @@ library(tidytext)
 
 library(ggbeeswarm)
 
-library(ggview)
+library(ggimage)
 
 library(segmented)
 
