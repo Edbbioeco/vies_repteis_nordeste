@@ -706,3 +706,33 @@ ggsave(filename = "grafico_sampling_rate.png", height = 12, width = 12)
   googledrive::drive_upload(path = "repteis_caatinga",
                             name = "grafico_sampling_rate.png",
                             overwrite = TRUE)
+
+# Projeção espacial ----
+
+## Calcular projeção ----
+
+rast_proj <- purrr::map(
+  modelos_vies,
+  \(modelo){
+
+    modelo |>
+      sampbias::project_bias() |>
+      terra::mask(caa) |>
+      terra::crop(caa)
+
+    },
+  .progress = TRUE)
+
+rast_proj
+
+purrr::map(
+  rast_proj,
+  \(raster){
+
+    ggplot() +
+      tidyterra::geom_spatraster(data = raster[[1:5]]) +
+      facet_wrap(~lyr) +
+      scale_fill_viridis_c(na.value = "transparent")
+
+    },
+  .progress = TRUE)
