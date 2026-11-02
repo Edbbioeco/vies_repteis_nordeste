@@ -271,6 +271,17 @@ df_pesos_media <- df_pesos |>
 
 df_pesos_media
 
+## Data Frame das figuras ----
+
+df_figuras <- tibble::tibble(figura = list.files(path = "./figuras",
+                                                 pattern = "^figura_.*\\.png$",
+                                                 full.names = TRUE),
+                             ordem = list.files(path = "./figuras",
+                                                pattern = "^figura_.*\\.png$") |>
+                               stringr::str_remove_all("figura_|.png"))
+
+df_figuras
+
 ## Criar gráfico ----
 
 df_pesos |>
