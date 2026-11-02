@@ -921,3 +921,10 @@ tabela_moran |>
   googledrive::drive_upload(path = "repteis_caatinga",
                             name = "tabela_moran.docx",
                             overwrite = TRUE)
+
+## Calcular Moran Médio por ordem ----
+
+df_moran |>
+  dplyr::summarise(Media = `Moran's I` |> mean() |> round(2),
+                   sd = `Moran's I` |> sd() |> round(2),
+                   .by = Order)
