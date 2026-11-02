@@ -775,3 +775,51 @@ purrr::imap_dfr(
 
   },
   .progress = TRUE)
+
+## Mapas ----
+
+purrr::imap(
+  rast_proj,
+  \(raster, ordem){
+
+    ggplot() +
+      tidyterra::geom_spatraster(data = raster |>
+                                   tidyterra::select(
+                                     -dplyr::contains(c("percent",
+                                                        "occ")))) +
+      scale_fill_viridis_c(na.value = "transparent",
+                           guide = guide_colourbar(
+                             title.hjust = 0.5,
+                             barheight = 12,
+                             frame.colour = "black",
+                             ticks.colour = "black",
+                             ticks.linewidth = 0.5)) +
+      facet_wrap(~lyr) +
+      labs(title = paste0("Order: ", ordem),
+           fill = "Sampling rate") +
+      theme_bw() +
+      theme(axis.text = element_text(size = 10, color = "black"),
+            legend.text = element_text(size = 15, color = "black"),
+            legend.title = element_text(size = 15, color = "black"),
+            legend.position = c(0.8, 0.25),
+            strip.text = element_text(size = 12.5, color = "black"),
+            strip.background = element_rect(color = "black",
+                                            linewidth = 1),
+            panel.background = element_rect(linewidth = 1,
+                                            color = "black"),
+            plot.title = element_text(size = 20, color = "black", face = "bold"),
+            plot.subtitle = element_text(size = 17.5, color = "black")) +
+      ggview::canvas(height = 10, width = 12)
+
+  },
+  .progress = TRUE) |>
+  patchwork::wrap_plots() +
+  patchwork::plot_layout(ncol = 2)
+
+ggsave("mapas_projecao.png",
+       height = 15, width = 15)
+
+"mapas_projecao.png" |>
+  googledrive::drive_upload(path = "repteis_caatinga",
+                            name = "mapas_projecao.png",
+                            overwrite = TRUE)
