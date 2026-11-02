@@ -736,3 +736,42 @@ purrr::map(
 
     },
   .progress = TRUE)
+
+## Calcular valores mínimos, máximos e médios de sampling rate ----
+
+purrr::imap_dfr(
+  rast_proj,
+  \(raster, ordem){
+
+    tibble::tibble(Ordem = ordem,
+                   min = raster |>
+                     tidyterra::select(
+                       -dplyr::contains(c("percent",
+                                          "occ"))) |>
+                     terra::values() |>
+                     na.omit() |>
+                     min(),
+                   max = raster |>
+                     tidyterra::select(
+                       -dplyr::contains(c("percent",
+                                          "occ"))) |>
+                     terra::values() |>
+                     na.omit() |>
+                     max(),
+                   media = raster |>
+                     tidyterra::select(
+                       -dplyr::contains(c("percent",
+                                          "occ"))) |>
+                     terra::values() |>
+                     na.omit() |>
+                     mean(),
+                   sd = raster |>
+                     tidyterra::select(
+                       -dplyr::contains(c("percent",
+                                          "occ"))) |>
+                     terra::values() |>
+                     na.omit() |>
+                     sd())
+
+  },
+  .progress = TRUE)
