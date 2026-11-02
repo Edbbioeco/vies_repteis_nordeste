@@ -839,3 +839,43 @@ janela <- caa |>
   spdep::nb2listw(style = "W")
 
 janela
+
+### Calcular I de Moran ----
+
+moran_orden_var <- purrr::imap(
+  rast_proj,
+  \(raster, ordem){
+
+    variavel <- raster |>
+      terra::names() |>
+      stringr::str_subset("Total_percentage|occurence",
+                          negate = TRUE)
+
+    purrr::map(
+      variavel,
+      \(var){
+
+        valores <- raster[[var]] |>
+          terra::values(mat = FALSE)
+
+        celulas <- which(!is.na(valores))
+
+        janela <- raster |>
+          terra::xyFromCell(celulas) |>
+          spdep::knearneigh(k = 8) |>
+          spdep::knn2nb() |>
+          spdep::nb2listw(styl = "W")
+
+        spdep::moran.mc(valores[celulas],
+                        janela,
+                        nsim = 10000)
+
+        }
+      ) |>
+      purrr::set_names(paste0(ordem, "_", variavel))
+
+    },
+  .progress = TRUE) |>
+  purrr::flatten()
+
+moran_orden_var
