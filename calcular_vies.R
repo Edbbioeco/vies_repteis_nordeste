@@ -823,3 +823,19 @@ ggsave("mapas_projecao.png",
   googledrive::drive_upload(path = "repteis_caatinga",
                             name = "mapas_projecao.png",
                             overwrite = TRUE)
+
+## Agregação espacial ----
+
+### Criar janela ----
+
+janela <- caa |>
+  sf::st_make_grid(cellsize = (10 / 111.3194)) |>
+  sf::st_as_sf() |>
+  sf::st_filter(
+    y = caa,
+    .predicate = sf::st_intersects
+  ) |>
+  spdep::poly2nb() |>
+  spdep::nb2listw(style = "W")
+
+janela
