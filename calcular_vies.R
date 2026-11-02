@@ -848,7 +848,7 @@ moran_orden_var <- purrr::imap(
 
     variavel <- raster |>
       terra::names() |>
-      stringr::str_subset("Total_percentage|occurence",
+      stringr::str_subset("Total_percentage|occurences",
                           negate = TRUE)
 
     purrr::map(
