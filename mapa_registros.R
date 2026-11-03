@@ -85,6 +85,22 @@ ggplot() +
   geom_sf(data = br, color = "black") +
   geom_sf(data = caa, color = "black", fill = "gold")
 
+## Figras ----
+
+### Importar ----
+
+figuras <- tibble::tibble(figuras = list.files(path = "figuras",
+                                               pattern = ".png$",
+                                               full.names = TRUE),
+                          order = list.files(path = "figuras",
+                                             pattern = ".png$") |>
+                            stringr::str_remove_all("figura_|.png") |>
+                            forcats::fct_relevel(c("Crocodylia",
+                                                   "Testudines",
+                                                   "Squamata")),
+                          longitude = -36,
+                          latitude = -14)
+
 # Mapa ----
 
 ggplot() +
