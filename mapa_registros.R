@@ -124,3 +124,6 @@ ggplot() +
                                         linewidth = 1),
         panel.background = element_rect(linewidth = 1,
                                         color = "black"))
+
+ggsave(filename = "mapa_registros.png",
+       height = 12, width = 12)
