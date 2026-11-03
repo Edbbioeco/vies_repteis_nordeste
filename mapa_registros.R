@@ -85,3 +85,42 @@ ggplot() +
   geom_sf(data = br, color = "black") +
   geom_sf(data = caa, color = "black", fill = "gold")
 
+# Mapa ----
+
+ggplot() +
+  geom_sf(data = br, color = "black", linewidth = 1,
+          aes(fill = "Brazil")) +
+  geom_sf(data = caa, color = "black", linewidth = 1,
+          aes(fill = "Caatinga")) +
+  geom_sf(data = registros |>
+            dplyr::mutate(order = order |>
+                            forcats::fct_relevel(c("Crocodylia",
+                                                   "Testudines",
+                                                   "Squamata"))) |>
+            sf::st_as_sf(coords = c(5:6),
+                         crs = caa |> sf::st_crs()),
+          aes(color = "Species records")) +
+  facet_wrap(~order, ncol = 2) +
+  coord_sf(xlim = caa |> sf::st_bbox() %>% .[c(1, 3)],
+           ylim = caa |> sf::st_bbox() %>% .[c(2, 4)]) +
+  scale_fill_manual(breaks = c("Brazil", "Caatinga", "Species records"),
+                    values = c("gray", "gold", "black"),
+                    guide = guide_legend(order = 1)) +
+  scale_color_manual(values = "black") +
+  ggspatial::annotation_scale(location = "br",
+                              tex_color = "black",
+                              text_cex = 1.5,
+                              text_face = "bold",
+                              bar_cols = c("black", "gold")) +
+  labs(fill = NULL,
+       color = NULL) +
+  theme_bw() +
+  theme(axis.text = element_text(size = 17.5, color = "black"),
+        legend.text = element_text(size = 20, color = "black"),
+        legend.position = c(0.7, 0.25),
+        legend.key = element_blank(),
+        strip.text = element_text(size = 15, color = "black"),
+        strip.background = element_rect(color = "black",
+                                        linewidth = 1),
+        panel.background = element_rect(linewidth = 1,
+                                        color = "black"))
