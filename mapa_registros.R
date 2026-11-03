@@ -55,7 +55,9 @@ registros |> dplyr::glimpse()
 ### Importar ----
 
 br <- sf::st_read("biomas.gpkg") |>
-  dplyr::mutate(geom = geom |> sf::st_union())
+  sf::st_make_valid() |>
+  sf::st_union() |>
+  smoothr::fill_holes(threshold = units::set_units(1e6, km2))
 
 ### Visualizar ----
 
@@ -78,3 +80,4 @@ caa
 ggplot() +
   geom_sf(data = br, color = "black") +
   geom_sf(data = caa, color = "black", fill = "gold")
+
