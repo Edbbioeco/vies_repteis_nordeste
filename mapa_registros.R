@@ -49,3 +49,10 @@ registros <- purrr::pmap_dfr(
 registros
 
 registros |> dplyr::glimpse()
+
+## Shapefile do Brasil ----
+
+### Importar ----
+
+br <- sf::st_read("biomas.gpkg") |>
+  dplyr::mutate(geom = geom |> sf::st_union())
