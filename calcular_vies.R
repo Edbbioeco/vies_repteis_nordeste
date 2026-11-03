@@ -783,7 +783,8 @@ purrr::imap(
                                    tidyterra::select(
                                      -dplyr::contains(c("percent",
                                                         "occ")))) +
-      scale_fill_viridis_c(na.value = "transparent",
+      scale_fill_viridis_c(option = "inferno",
+                           na.value = "transparent",
                            guide = guide_colourbar(
                              title.hjust = 0.5,
                              barheight = 12,
