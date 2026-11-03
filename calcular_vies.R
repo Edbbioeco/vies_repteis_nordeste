@@ -38,25 +38,23 @@ googledrive::drive_auth("edson.nilton@ufpe.br")
 
 ## Importar os dados ----
 
-registros <- purrr::map_dfr(
-  c("gbif",
-    "sibbr",
-    "specieslink",
-    "inaturalist",
-    "herpetohelp"),
-  \(reg){
+registros <- purrr::pmap_dfr(
+  "repteis_caatinga" |>
+    googledrive::drive_get() |>
+    googledrive::drive_ls() |>
+    dplyr::filter(name |> stringr::str_detect("^registros_")) |>
+    dplyr::select(id, name) |>
+    dplyr::rename(arquivo = 1,
+                  nome = 2),
+  \(arquivo, nome){
 
-    "repteis_caatinga" |>
-      googledrive::drive_get() |>
-      googledrive::drive_ls() |>
-      dplyr::filter(name == paste0("registros_",
-                                   reg,
-                                   ".xlsx")) |>
+    arquivo |>
       googledrive::drive_download(file = _,
                                   path = tempfile(fileext = ".xlsx")) |>
       dplyr::pull(local_path) |>
       readxl::read_xlsx() |>
-      dplyr::mutate(source = reg) |>
+      dplyr::mutate(source = nome |>
+                      stringr::str_remove_all("registros_|.xlsx")) |>
       dplyr::rename("decimalLongitude" = Longitude,
                     "decimalLatitude" = Latitude)
 
