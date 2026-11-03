@@ -99,7 +99,7 @@ figuras <- tibble::tibble(figuras = list.files(path = "figuras",
                             forcats::fct_relevel(c("Crocodylia",
                                                    "Testudines",
                                                    "Squamata")),
-                          longitude = -36,
+                          longitude = -37,
                           latitude = -14)
 
 ### Visualizar ----
