@@ -123,6 +123,9 @@ ggplot() +
             sf::st_as_sf(coords = c(5:6),
                          crs = caa |> sf::st_crs()),
           aes(color = "Species records")) +
+  ggimage::geom_image(data = figuras,
+                      aes(longitude, latitude, image = figuras),
+                      size = 0.3) +
   facet_wrap(~order, ncol = 2) +
   coord_sf(xlim = caa |> sf::st_bbox() %>% .[c(1, 3)],
            ylim = caa |> sf::st_bbox() %>% .[c(2, 4)]) +
