@@ -817,7 +817,7 @@ purrr::imap(
       coord_sf(xlim = caa |> sf::st_bbox() %>% .[c(1, 3)],
                ylim = caa |> sf::st_bbox() %>% .[c(2, 4)]) +
       facet_wrap(~lyr) +
-      labs(title = paste0("Order: ", ordem),
+      labs(title = ordem,
            fill = "Sampling rate") +
       theme_bw() +
       theme(axis.text = element_text(size = 10, color = "black"),
