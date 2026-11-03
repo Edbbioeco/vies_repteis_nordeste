@@ -139,7 +139,9 @@ ggplot() +
                               text_face = "bold",
                               bar_cols = c("black", "gold")) +
   labs(fill = NULL,
-       color = NULL) +
+       color = NULL,
+       x = NULL,
+       y = NULL) +
   theme_bw() +
   theme(axis.text = element_text(size = 17.5, color = "black"),
         legend.text = element_text(size = 20, color = "black"),
