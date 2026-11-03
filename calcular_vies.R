@@ -799,6 +799,7 @@ purrr::imap(
   \(raster, ordem){
 
     ggplot() +
+      geom_sf(data = br, color = "black", linewidth = 1) +
       tidyterra::geom_spatraster(data = raster |>
                                    tidyterra::select(
                                      -dplyr::contains(c("percent",
@@ -811,6 +812,10 @@ purrr::imap(
                              frame.colour = "black",
                              ticks.colour = "black",
                              ticks.linewidth = 0.5)) +
+      geom_sf(data = caa, color = "black", fill = "transparent",
+              linewidth = 0.5) +
+      coord_sf(xlim = caa |> sf::st_bbox() %>% .[c(1, 3)],
+               ylim = caa |> sf::st_bbox() %>% .[c(2, 4)]) +
       facet_wrap(~lyr) +
       labs(title = paste0("Order: ", ordem),
            fill = "Sampling rate") +
