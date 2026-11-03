@@ -95,6 +95,7 @@ figuras <- tibble::tibble(figuras = list.files(path = "figuras",
                           order = list.files(path = "figuras",
                                              pattern = ".png$") |>
                             stringr::str_remove_all("figura_|.png") |>
+                            stringr::str_to_title() |>
                             forcats::fct_relevel(c("Crocodylia",
                                                    "Testudines",
                                                    "Squamata")),
