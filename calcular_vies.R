@@ -824,7 +824,7 @@ purrr::imap(
             legend.text = element_text(size = 15, color = "black"),
             legend.title = element_text(size = 15, color = "black"),
             legend.position = c(0.8, 0.25),
-            strip.text = element_text(size = 12.5, color = "black"),
+            strip.text = element_text(size = 12.5, color = "black", face = "bold"),
             strip.background = element_rect(color = "black",
                                             linewidth = 1),
             panel.background = element_rect(linewidth = 1,
