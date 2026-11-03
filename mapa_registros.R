@@ -127,3 +127,8 @@ ggplot() +
 
 ggsave(filename = "mapa_registros.png",
        height = 12, width = 12)
+
+"mapa_registros.png" |>
+  googledrive::drive_upload(path = "repteis_caatinga",
+                            name = "mapa_registros.png",
+                            overwrite = TRUE)
