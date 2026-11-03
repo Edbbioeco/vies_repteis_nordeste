@@ -8,6 +8,8 @@ library(readxl)
 
 library(sf)
 
+library(smoothr)
+
 library(ggspatial)
 
 # Dados ----
