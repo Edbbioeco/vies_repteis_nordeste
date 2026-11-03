@@ -147,7 +147,7 @@ ggplot() +
         legend.text = element_text(size = 20, color = "black"),
         legend.position = c(0.7, 0.25),
         legend.key = element_blank(),
-        strip.text = element_text(size = 15, color = "black"),
+        strip.text = element_text(size = 25, color = "black"),
         strip.background = element_rect(color = "black",
                                         linewidth = 1),
         panel.background = element_rect(linewidth = 1,
