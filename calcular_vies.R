@@ -67,6 +67,15 @@ registros
 
 registros |> dplyr::glimpse()
 
+# Shapefile do Brasil ----
+
+## Importar ----
+
+br <- sf::st_read("biomas.gpkg") |>
+  sf::st_make_valid() |>
+  sf::st_union() |>
+  smoothr::fill_holes(threshold = units::set_units(1e6, "km2"))
+
 # Shapefile da Caatinga ----
 
 ## Importar ----
