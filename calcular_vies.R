@@ -120,10 +120,7 @@ purrr::map(
   gaz,
   \(gaz){
 
-    ggplot() +
-      geom_sf(data = caa) +
-      geom_sf(data = gaz |>
-                sf::st_as_sf())
+    gaz |> plot()
 
     },
   .progress = TRUE)
