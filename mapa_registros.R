@@ -101,6 +101,12 @@ figuras <- tibble::tibble(figuras = list.files(path = "figuras",
                           longitude = -36,
                           latitude = -14)
 
+### Visualizar ----
+
+figuras
+
+figuras |> dplyr::glimpse()
+
 # Mapa ----
 
 ggplot() +
