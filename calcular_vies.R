@@ -105,12 +105,12 @@ gaz <- "repteis_caatinga" |>
 
       },
     .progress = TRUE) |>
-  setNames("repteis_caatinga" |>
-             googledrive::drive_get() |>
-             googledrive::drive_ls() |>
-             dplyr::filter(name  |> stringr::str_detect("^gaz_")) |>
-             dplyr::pull(name) |>
-             stringr::str_remove_all("gaz_|.gpkg"))
+  purrr::set_names("repteis_caatinga" |>
+                     googledrive::drive_get() |>
+                     googledrive::drive_ls() |>
+                     dplyr::filter(name  |> stringr::str_detect("^gaz_")) |>
+                     dplyr::pull(name) |>
+                     stringr::str_remove_all("gaz_|.gpkg"))
 
 ## Visualizar ----
 
@@ -161,7 +161,7 @@ vies_ordem <- purrr::map(
 
   },
   .progress = TRUE) |>
-  setNames(c("Crocodylia", "Testudines", "Squamata"))
+  purrr::set_names(c("Crocodylia", "Testudines", "Squamata"))
 
 vies_ordem
 
@@ -219,7 +219,7 @@ modelos_vies <- purrr::map(
 
     },
   .progress = TRUE) |>
-  setNames(c("Crocodylia", "Testudines", "Squamata"))
+  purrr::set_names(c("Crocodylia", "Testudines", "Squamata"))
 
 modelos_vies
 
@@ -430,11 +430,12 @@ modelos_seg <- purrr::pmap(
 
     },
   .progress = TRUE) |>
-  setNames(tidyr::expand_grid(
-    ordem = c("Crocodylia",
-              "Testudines",
-              "Squamata"),
-    gaz = df_sr$Factor |> unique()) |>
+  purrr::set_names(
+    tidyr::expand_grid(
+      ordem = c("Crocodylia",
+                "Testudines",
+                "Squamata"),
+      gaz = df_sr$Factor |> unique()) |>
       dplyr::mutate(nome = paste0(ordem, "_", gaz)) |>
       dplyr::pull(nome))
 
@@ -483,12 +484,12 @@ modelos_seg <- purrr::map(
 
     },
   .progress = TRUE) |>
-  setNames("repteis_caatinga" |>
-             googledrive::drive_get() |>
-             googledrive::drive_ls() |>
-             dplyr::filter(name |> stringr::str_detect("_seg.rds$")) |>
-             dplyr::pull(name) |>
-             stringr::str_remove_all("modelo_|_seg.rds"))
+  purrr::set_names("repteis_caatinga" |>
+                     googledrive::drive_get() |>
+                     googledrive::drive_ls() |>
+                     dplyr::filter(name |> stringr::str_detect("_seg.rds$")) |>
+                     dplyr::pull(name) |>
+                     stringr::str_remove_all("modelo_|_seg.rds"))
 
 modelos_seg
 
@@ -514,11 +515,12 @@ modelos_quebra <- purrr::pmap(
 
   },
   .progress = TRUE) |>
-  setNames(tidyr::expand_grid(
-    ordem = c("Crocodylia",
-              "Testudines",
-              "Squamata"),
-    gaz = df_sr$Factor |> unique()) |>
+  purrr::set_names(
+    tidyr::expand_grid(
+      ordem = c("Crocodylia",
+                "Testudines",
+                "Squamata"),
+      gaz = df_sr$Factor |> unique()) |>
       dplyr::mutate(nome = paste0(ordem, "_", gaz)) |>
       dplyr::pull(nome))
 
@@ -567,12 +569,12 @@ modelos_quebra <- purrr::map(
 
   },
   .progress = TRUE) |>
-  setNames("repteis_caatinga" |>
-             googledrive::drive_get() |>
-             googledrive::drive_ls() |>
-             dplyr::filter(name |> stringr::str_detect("_quebra.rds$")) |>
-             dplyr::pull(name) |>
-             stringr::str_remove_all("modelo_|_quebra.rds"))
+  purrr::set_names("repteis_caatinga" |>
+                     googledrive::drive_get() |>
+                     googledrive::drive_ls() |>
+                     dplyr::filter(name |> stringr::str_detect("_quebra.rds$")) |>
+                     dplyr::pull(name) |>
+                     stringr::str_remove_all("modelo_|_quebra.rds"))
 
 modelos_quebra
 
