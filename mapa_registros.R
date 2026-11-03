@@ -63,3 +63,8 @@ br
 
 ggplot() +
   geom_sf(data = br, color = "black")
+
+## Shapefile da Caatinga ----
+
+caa <- sf::st_read("biomas.gpkg") |>
+  dplyr::filter(name_biome == "Caatinga")
