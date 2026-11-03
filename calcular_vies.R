@@ -685,7 +685,8 @@ df_sr |>
                       inherit.aes = FALSE,
                       size = 0.75) +
   facet_wrap(~Order, ncol = 1, scales = "free_y") +
-  scale_x_continuous(breaks = seq(0, 1500, 100)) +
+  scale_x_continuous(breaks = seq(0, 1500, 100),
+                     expand = c(0.01, 1)) +
   theme_bw() +
   theme(axis.text = element_text(size = 20, color = "black"),
         axis.title = element_text(size = 20, color = "black"),
