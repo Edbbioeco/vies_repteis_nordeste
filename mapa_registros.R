@@ -56,3 +56,10 @@ registros |> dplyr::glimpse()
 
 br <- sf::st_read("biomas.gpkg") |>
   dplyr::mutate(geom = geom |> sf::st_union())
+
+### Visualizar ----
+
+br
+
+ggplot() +
+  geom_sf(data = br, color = "black")
