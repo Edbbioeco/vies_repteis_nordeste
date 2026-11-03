@@ -81,7 +81,7 @@ caa
 ggplot() +
   geom_sf(data = caa, color = "black") +
   geom_point(data = registros,
-             aes(Longitude, Latitude, color = order))
+             aes(decimalLongitude, decimalLatitude, color = order))
 
 # Gazetteers ----
 
