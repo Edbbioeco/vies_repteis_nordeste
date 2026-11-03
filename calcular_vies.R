@@ -10,6 +10,8 @@ library(sf)
 
 library(smoothr)
 
+library(units)
+
 library(terra)
 
 library(sampbias)
