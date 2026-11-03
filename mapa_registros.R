@@ -134,7 +134,7 @@ ggplot() +
                     guide = guide_legend(order = 1)) +
   scale_color_manual(values = "black") +
   ggspatial::annotation_scale(location = "br",
-                              tex_color = "black",
+                              tex_col = "black",
                               text_cex = 1.5,
                               text_face = "bold",
                               bar_cols = c("black", "gold")) +
